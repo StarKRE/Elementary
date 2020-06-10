@@ -44,27 +44,20 @@ namespace OregoFramework.Db
 
         protected IEnumerator Execute(string commandText, Func<DbCommand, Task> asyncFunc)
         {
-            using (var command = this.connection.CreateCommand())
+            var command = this.connection.CreateCommand();
+            command.CommandText = commandText;
+            yield return Continuation.Suspend(continuation =>
             {
-                command.CommandText = commandText;
-                yield return Continuation.Suspend(continuation =>
-                {
-                    // ReSharper disable once AccessToDisposedClosure
-                    Task
-                        .Run(() => asyncFunc.Invoke(command))
-                        .ContinueWith(it => continuation.Continue());
-                });
-            }
+                Task
+                    .Run(() => asyncFunc.Invoke(command))
+                    .ContinueWith(it => command.Dispose())
+                    .ContinueWith(it => continuation.Continue());
+            });
         }
-
         #endregion
 
         #region SerializeEntity
-        
-        /**
-         * Dirty code for fast speed.
-         */
-        
+
         protected string SerializeEntities<T>(T[] entities, Func<T, object[]> transformFunc)
         {
             var stringBuilder = new StringBuilder();

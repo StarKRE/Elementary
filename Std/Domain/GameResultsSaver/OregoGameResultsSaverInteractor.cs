@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using OregoFramework.Domain;
 using OregoFramework.Game;
 
-namespace CatchACockRoach.Domain
+namespace OregoFramework.Domain
 {
     public abstract class OregoGameResultsSaverInteractor : OregoInteractor
     {
         #region Event
 
-        public event Action<object, IOregoGameSession> OnGameResultsSavedEvent;
+        public event Action<object, IOregoGameContext> OnGameResultsSavedEvent;
 
         #endregion
         
@@ -22,14 +22,14 @@ namespace CatchACockRoach.Domain
             this.gameWriterInteractors = this.GetInteractors<IOregoGameResultsWriterInteractor>();
         }
 
-        public IEnumerator SaveGameResults(object sender, IOregoGameSession gameSession)
+        public IEnumerator SaveGameResults(object sender, IOregoGameContext gameContext)
         {
             foreach (var gameWriterInteractor in this.gameWriterInteractors)
             {
-                yield return gameWriterInteractor.OnWriteGameResults(sender, gameSession);
+                yield return gameWriterInteractor.OnWriteGameResults(sender, gameContext);
             }
             
-            this.OnGameResultsSavedEvent?.Invoke(sender, gameSession);
+            this.OnGameResultsSavedEvent?.Invoke(sender, gameContext);
         }
     }
 }

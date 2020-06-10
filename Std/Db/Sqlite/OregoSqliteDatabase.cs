@@ -26,6 +26,8 @@ namespace OregoFramework.Db
 
         protected abstract string databaseName { get; }
 
+        public bool isInitialized { get; private set; }
+
         public override void OnCreate()
         {
             base.OnCreate();
@@ -36,7 +38,7 @@ namespace OregoFramework.Db
 
         #region Init
 
-        public IEnumerator Init()
+        public void Initialize()
         {
             string databasePath;
             if (platform == RuntimePlatform.Android)
@@ -49,7 +51,7 @@ namespace OregoFramework.Db
             }
 
             this.connectionUri = $"URI=file:{databasePath}";
-            yield return this.Connect();
+            this.isInitialized = true;
         }
 
         private void InitAsAndroid(out string databasePath)
@@ -68,7 +70,7 @@ namespace OregoFramework.Db
 
         private void InitAsEditor(out string databasePath)
         {
-            databasePath = $"{dataPath}/StreamingAssets/{this.databaseName}";
+            databasePath = $"{this.dataPath}/StreamingAssets/{this.databaseName}";
         }
 
         #endregion
@@ -77,6 +79,12 @@ namespace OregoFramework.Db
 
         public IEnumerator Connect()
         {
+            if (!this.isInitialized)
+            {
+                throw new Exception("Database is not initialized! " +
+                                    "Did you forget to call OregoSqliteDatabase.Initialize()");
+            }
+
             this.connection = new SqliteConnection(this.connectionUri);
             this.connection.Open();
             if (this.connection.State != ConnectionState.Open)

@@ -2,10 +2,10 @@ using System.Collections;
 using OregoFramework.Domain;
 using OregoFramework.Game;
 
-namespace CatchACockRoach.Domain
+namespace OregoFramework.Domain
 {
     public interface IOregoGameResultsWriterInteractor : IOregoInteractor
     {
-        IEnumerator OnWriteGameResults(object sender, IOregoGameSession gameSession);
+        IEnumerator OnWriteGameResults(object sender, IOregoGameContext gameContext);
     }
 }
