@@ -4,7 +4,7 @@
 
 [Download v.1.3](https://github.com/StarKRE/Orego/releases/download/v.1.3/Orego.unitypackage)
 
-Library support Unity 2019.1.8f+ 
+Library support Unity 2019.1.8f and later 
 
 ### How to start?
 
@@ -55,7 +55,7 @@ public sealed class MyApplication : Element, ISingletonElement
 
 ### Create your First Element Layer
 
-For example we create Repository Layer:
+For example we create a repository layer:
 
 #### 1.) Create repository classes:
 
@@ -77,7 +77,7 @@ public sealed class UserRepository : Element, IRepository
     }
 }
 ```
-#### 2.) Create repository Layer
+#### 2.) Create a repository Layer
 
 ```csharp
 using OregoFramework.Core;
@@ -88,7 +88,7 @@ public sealed class RepositoryLayer : ElementLayer<IRepository>
 }
 ```
 
-#### 3.) Connect repository layer to the my app:
+#### 3.) Connect the repository layer to the my app:
 
 ```csharp
 using OregoFramework.Core;
@@ -113,9 +113,4 @@ public sealed class MyApplication : Element, ISingletonElement
 ```
 
 #### Result:
-
-
-
-
-
-
+![image](https://user-images.githubusercontent.com/22048950/87093956-b6e23a00-c246-11ea-859a-8a5a64044d26.png)
