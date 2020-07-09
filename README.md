@@ -50,7 +50,7 @@ public sealed class MyApplication : Element, ISingletonElement
 }
 ```
 
-### Add MainScript.cs to your game object and play.
+### Add MainScript.cs to your game object and play:
 >  Hello World!
 
 ---
@@ -113,5 +113,6 @@ public sealed class MyApplication : Element, ISingletonElement
     }
 }
 ```
+
 >  Hello World!
 >  User repository started!
