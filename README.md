@@ -77,7 +77,7 @@ public sealed class UserRepository : Element, IRepository
     public override void OnStart()
     {
         base.OnStart();
-        Debug.Log("User repository started!");
+        Debug.Log("User repository is started!");
     }
 }
 ```
@@ -119,4 +119,4 @@ public sealed class MyApplication : Element, ISingletonElement
 ### Play Unity:
 >  Hello World!
 
->  User repository started!
+>  User repository is started!
