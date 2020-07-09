@@ -46,12 +46,9 @@ using UnityEngine;
 [OregoContext]
 public sealed class MyApplication : Element, ISingletonElement
 {
-    public static MyApplication instance { get; private set; }
-
     public void OnBecameSingleton()
     {
         Debug.Log("My app is a singleton!");
-        instance = this;
     }
 }
 ```
