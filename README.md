@@ -80,7 +80,7 @@ public sealed class UserRepository : Element, IRepository
     }
 }
 ```
-#### 2.) Create a repository Layer
+#### 2.) Create a repository layer
 
 ```csharp
 using OregoFramework.Core;
