@@ -34,7 +34,7 @@ public sealed class MyApplication : Element
 }
 ```
 
-### Add magic interface
+### Add Magic Interface
 
 ```csharp
 using OregoFramework.Core;
@@ -50,7 +50,7 @@ public sealed class MyApplication : Element, ISingletonElement
 }
 ```
 
-### Add MainScript.cs to your game object and play:
+### Add MainScript.cs to your Game Object and Play:
 >  Hello World!
 
 ---
