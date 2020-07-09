@@ -12,7 +12,7 @@ namespace OregoFramework.Editor
         private static void SelectConfigAsset()
         {
             const string path =
-                "Assets/Plugins/Orego/Config/Assembly/Resources/AssemblyConfig.asset";
+                "Assets/Orego/Config/Assembly/Resources/AssemblyConfig.asset";
             Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(path);
         }
     }
