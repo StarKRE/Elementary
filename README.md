@@ -50,7 +50,7 @@ public sealed class MyApplication : Element, ISingletonElement
 }
 ```
 
-### Add MainScript.cs to your Game Object and Play:
+### Add MainScript.cs to your Game Object and play Unity:
 >  Hello World!
 
 ---
@@ -114,5 +114,6 @@ public sealed class MyApplication : Element, ISingletonElement
 }
 ```
 
+### Play Unity:
 >  Hello World!
 >  User repository started!
