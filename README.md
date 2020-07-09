@@ -36,7 +36,8 @@ public sealed class MyApplication : Element
 }
 ```
 
-### Add Magic Interface
+### Add Singleton Interface
+Orego creates an instance automatically
 
 ```csharp
 using OregoFramework.Core;
