@@ -57,7 +57,7 @@ public sealed class MyApplication : Element, ISingletonElement
 
 For example we create a repository layer:
 
-#### 1.) Create repository classes:
+#### 1.) Create a repository:
 
 ```csharp
 using OregoFramework.Core;
