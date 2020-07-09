@@ -100,7 +100,7 @@ using UnityEngine;
 [OregoContext]
 public sealed class MyApplication : Element, ISingletonElement
 {
-    private RepositoryLayer repositoryLayer;
+    private IElement repositoryLayer;
     
     public void OnBecameSingleton()
     {
@@ -110,7 +110,7 @@ public sealed class MyApplication : Element, ISingletonElement
     public override void OnCreate()
     {
         base.OnCreate();
-        this.repositoryLayer = this.CreateElement<RepositoryLayer>(typeof(RepositoryLayer));
+        this.repositoryLayer = this.CreateElement<IElement>(typeof(RepositoryLayer));
     }
 }
 ```
