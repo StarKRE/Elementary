@@ -25,9 +25,6 @@ public sealed class MainScript : MonoBehaviour
 ```
 ---
 
-
-
-
 ### Create your First Element
 
 ```csharp
@@ -59,14 +56,11 @@ public sealed class MyApplication : Element, ISingletonElement
 >  Hello World!
 ---
 
-
-
-
 ### Create your First Element Layer
 
 For example we create a repository layer:
 
-#### 1.) Create a repository:
+#### 1.) Create a repository
 
 ```csharp
 using OregoFramework.Core;
@@ -97,7 +91,7 @@ public sealed class RepositoryLayer : ElementLayer<IRepository>
 }
 ```
 
-#### 3.) Connect the repository layer to the my app:
+#### 3.) Connect the repository layer to the my app
 
 ```csharp
 using OregoFramework.Core;
