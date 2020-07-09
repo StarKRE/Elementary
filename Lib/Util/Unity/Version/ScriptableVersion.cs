@@ -6,7 +6,7 @@ namespace OregoFramework.Util
         fileName = "ScriptableVersion",
         menuName = "Orego/Util/New ScriptableVersion"
     )]
-    public sealed class ScriptableVersion : AutoScriptableObject
+    public sealed class ScriptableVersion : ScriptableObject
     {
         [SerializeField] 
         public int version;

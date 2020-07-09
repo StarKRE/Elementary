@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace OregoFramework.Util
 {
-    public sealed class PointerButton : Button
+    public class PointerButton : Button
     {
         #region Event
 

@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace OregoFramework.Util
 {
     public static class ComponentUtils
     {
-        public static bool HasComponent<T>(this Component component, out T result)
+        public static bool TryGetComponent<T>(this Component component, out T result)
         {
             var requiredComponent = component.GetComponent<T>();
             if (requiredComponent != null)
@@ -14,7 +15,7 @@ namespace OregoFramework.Util
                 return true;
             }
 
-            result = default(T);
+            result = default;
             return false;
         }
         
@@ -36,6 +37,19 @@ namespace OregoFramework.Util
         public static void SetVisible(this Component component)
         {
             component.gameObject.SetActive(true);
+        }
+        
+        public static IEnumerable<T> GetComponentsInChildrenNoParent<T>(this Component component)
+        {
+            var requieredComponents = new List<T>();
+            var transform = component.transform;
+            foreach (Transform childTransform in transform)
+            {
+                var children = childTransform.GetComponentsInChildren<T>(true);
+                requieredComponents.AddRange(children);
+            }
+
+            return requieredComponents;
         }
     }
 }

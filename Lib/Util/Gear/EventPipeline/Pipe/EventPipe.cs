@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace OregoFramework.Util.Gear
 {
-    public abstract class EventPipe : AutoScriptableObject, IEventPipe
+    public abstract class EventPipe : AutoMonoBehaviour, IEventPipe
     {
         public List<IEventHandler> handlerSequence { get; }
 

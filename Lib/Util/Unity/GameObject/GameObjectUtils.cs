@@ -6,10 +6,6 @@ namespace OregoFramework.Util
 {
     public static class GameObjectUtils
     {
-        /**
-         * Has.
-         */
-
         public static bool HasComponent<T>(this GameObject myObject)
         {
             return myObject.GetComponent<T>() != null;
@@ -24,7 +20,7 @@ namespace OregoFramework.Util
                 return true;
             }
 
-            result = default(T);
+            result = default;
             return false;
         }
 

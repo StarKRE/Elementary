@@ -3,7 +3,7 @@ using OregoFramework.Tool;
 
 namespace OregoFramework.UI
 {
-    public interface IUIStatefulResource : IOregoResource
+    public interface IUIStatefulResource : IResource
     {
         Type stateAdapterType { get; }
     }

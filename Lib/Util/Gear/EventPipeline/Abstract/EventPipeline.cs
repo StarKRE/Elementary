@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace OregoFramework.Util.Gear
 {
-    public abstract class EventPipeline : AutoScriptableObject, IEventPipeline
+    public abstract class EventPipeline : AutoMonoBehaviour, IEventPipeline
     {
         #region Event
 

@@ -1,6 +1,6 @@
 namespace OregoFramework.Util.Gear
 {
-    public abstract class EventHandler : AutoScriptableObject, IEventHandler
+    public abstract class EventHandler : AutoMonoBehaviour, IEventHandler
     {
         public virtual bool isEnabled { get; set; } = true;
 

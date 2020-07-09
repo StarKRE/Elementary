@@ -16,8 +16,24 @@ namespace OregoFramework.Util
 
         public static IEnumerator Join(this Routine routine, IEnumerator enumerator)
         {
-            routine.Start(enumerator);
-            yield return new WaitWhile(routine.IsWorking);
+            routine.Run(enumerator);
+            yield return new WaitWhile(routine.IsRunning);
+        }
+
+        public static IEnumerator TryJoin(this Routine routine, Func<IEnumerator> func)
+        {
+            var enumerator = func.Invoke();
+            yield return routine.TryJoin(enumerator);
+        }
+
+        public static IEnumerator TryJoin(this Routine routine, IEnumerator enumerator)
+        {
+            if (routine.IsRunning())
+            {
+                yield break;
+            }
+
+            yield return routine.Join(enumerator);
         }
 
         public static IEnumerator ForceJoin(this Routine routine, Func<IEnumerator> func)
@@ -28,34 +44,50 @@ namespace OregoFramework.Util
 
         public static IEnumerator ForceJoin(this Routine routine, IEnumerator enumerator)
         {
-            routine.ForceStart(enumerator);
-            yield return new WaitWhile(routine.IsWorking);
+            routine.ForceRun(enumerator);
+            yield return new WaitWhile(routine.IsRunning);
         }
 
         #endregion
-        
-        #region Start
 
-        public static void Start(this Routine routine, Func<IEnumerator> func)
+        #region Run
+
+        public static void Run(this Routine routine, Func<IEnumerator> func)
         {
             var enumerator = func.Invoke();
-            routine.Start(enumerator);
+            routine.Run(enumerator);
         }
 
-        public static void ForceStart(this Routine routine, Func<IEnumerator> func)
+        public static void TryRun(this Routine routine, Func<IEnumerator> func)
+        {
+            var enumerator = func.Invoke();
+            routine.TryRun(enumerator);
+        }
+
+        public static void TryRun(this Routine routine, IEnumerator enumerator)
+        {
+            if (routine.IsRunning())
+            {
+                return;
+            }
+
+            routine.Run(enumerator);
+        }
+
+        public static void ForceRun(this Routine routine, Func<IEnumerator> func)
         {
             var enumerator = func?.Invoke();
-            routine.ForceStart(enumerator);
+            routine.ForceRun(enumerator);
         }
 
-        public static void ForceStart(this Routine routine, IEnumerator enumerator)
+        public static void ForceRun(this Routine routine, IEnumerator enumerator)
         {
-            if (routine.IsWorking())
+            if (routine.IsRunning())
             {
                 routine.Cancel();
             }
 
-            routine.Start(enumerator);
+            routine.Run(enumerator);
         }
 
         #endregion

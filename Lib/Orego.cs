@@ -12,7 +12,7 @@ namespace OregoFramework.Core
     {
         #region Const
 
-        public const string CONFIG_NAME = "OregoMainConfig";
+        public const string DEFAULT_CONFIG_NAME = "MainConfig";
 
         #endregion
 
@@ -22,9 +22,9 @@ namespace OregoFramework.Core
         public static bool isStarted { get; private set; }
 
         /// <summary>
-        ///     <para>Settings of the framework.</para>
+        ///     <para>Core of the framework.</para>
         /// </summary>
-        private static OregoMainConfig mainConfig;
+        private static ICore core;
 
         /// <summary>
         ///     <para>Map of global object references.</para>
@@ -40,9 +40,10 @@ namespace OregoFramework.Core
         ///     <para>Deploys the framework.</para>
         /// </summary>
         ///    <param name="configPath">The path to config asset of framework in Resources.
-        ///     By default the name of path is "OregoMainConfig".</param>
+        ///     By default the name of path is "MainConfig".</param>
         /// <exception cref="Exception">Orego Framework has already launched!</exception>
-        public static void Start(string configPath = CONFIG_NAME)
+        /// <exception cref="Exception">Core type is not found!</exception>
+        public static void Start(string configPath = DEFAULT_CONFIG_NAME)
         {
             if (isStarted)
             {
@@ -50,10 +51,18 @@ namespace OregoFramework.Core
             }
 
             isStarted = true;
-            var asset = Resources.Load<OregoMainConfig>(configPath);
-            mainConfig = ScriptableObject.Instantiate(asset);
-            mainConfig.Install();
-            Resources.UnloadUnusedAssets();
+            var asset = Resources.Load<MainConfig>(configPath);
+            var controllerTypeName = asset.coreTypeName;
+            var controllerType = Type.GetType(controllerTypeName);
+            var type = controllerType;
+            if (type is null)
+            {
+                throw new Exception($"Core type {controllerTypeName} is not found!");
+            }
+
+            core = (ICore) Activator.CreateInstance(type);
+            core.Install();
+            Resources.UnloadAsset(asset);
         }
 
         /// <summary>
@@ -68,11 +77,9 @@ namespace OregoFramework.Core
             }
 
             isStarted = false;
-            mainConfig.Uninstall();
-            ScriptableObject.Destroy(mainConfig);
-            Resources.UnloadUnusedAssets();
+            core.Uninstall();
+            core = null;
         }
-
 
         /// <summary>
         ///     <param name="id">Object id.</param>
@@ -111,6 +118,23 @@ namespace OregoFramework.Core
         public static void RemoveObject(string id)
         {
             objectMap.Remove(id);
+        }
+        
+        /// <summary>
+        ///     <para>Responsibles for installing and uninstalling of
+        ///     your framework system.</para>
+        /// </summary>
+        public interface ICore
+        {
+            /// <summary>
+            ///     <para>Use this methdod for deploy your framework system.</para>
+            /// </summary>
+            void Install();
+
+            /// <summary>
+            ///     <para>Use this method to dispose your framework system.</para>
+            /// </summary>
+            void Uninstall();
         }
     }
 }

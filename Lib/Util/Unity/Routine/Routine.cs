@@ -25,27 +25,20 @@ namespace OregoFramework.Util
             this.OnCanceledEvent = new AutoEvent();
         }
 
-        #region Start
+        #region Run
 
-        public void Start(IEnumerator enumerator)
+        public void Run(IEnumerator enumerator)
         {
-            if (this.IsWorking())
+            if (this.IsRunning())
             {
-                return;
-            }
-
-            if (!this.dispatcher.isActiveAndEnabled)
-            {
-                return;
+                throw new Exception("Routine is already running!");
             }
 
             var wrappedEnumerator = this.GetWrappedEnumerator(enumerator);
             var routine = this.dispatcher.StartCoroutine(wrappedEnumerator);
             this.routine = routine;
         }
-
-        #endregion
-
+        
         private IEnumerator GetWrappedEnumerator(IEnumerator enumerator)
         {
             yield return enumerator;
@@ -53,30 +46,25 @@ namespace OregoFramework.Util
             this.OnFinishedEvent?.Invoke();
         }
 
-        #region Cancel
+        #endregion
 
-        public void Cancel()
+        public bool Cancel()
         {
-            if (!this.IsWorking())
+            if (!this.IsRunning())
             {
-                return;
+                return false;
             }
 
             this.dispatcher.StopCoroutine(this.routine);
             this.routine = null;
             this.OnCanceledEvent?.Invoke();
+            return true;
         }
 
-        #endregion
-
-        #region IsWorking
-
-        public bool IsWorking()
+        public bool IsRunning()
         {
-            return this.routine != null;
+            return this.routine != null && this.dispatcher.isActiveAndEnabled;
         }
-
-        #endregion
 
         public void Dispose()
         {
@@ -84,7 +72,7 @@ namespace OregoFramework.Util
             {
                 this.dispatcher.StopCoroutine(this.routine);
             }
-            
+
             this.OnFinishedEvent.Dispose();
             this.OnCanceledEvent.Dispose();
         }
