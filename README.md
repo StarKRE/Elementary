@@ -55,7 +55,7 @@ public sealed class MyApplication : Element, ISingletonElement
 }
 ```
 
-### Add **MainScript.cs** to your Game Object and play Unity:
+### Add *MainScript.cs* to your Game Object and play Unity:
 >  Hello World!
 ---
 
