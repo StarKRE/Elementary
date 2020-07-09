@@ -23,8 +23,10 @@ public sealed class MainScript : MonoBehaviour
     }
 }
 ```
-
 ---
+
+
+
 
 ### Create your First Element
 
@@ -55,8 +57,10 @@ public sealed class MyApplication : Element, ISingletonElement
 
 ### Add MainScript.cs to your Game Object and play Unity:
 >  Hello World!
-
 ---
+
+
+
 
 ### Create your First Element Layer
 
