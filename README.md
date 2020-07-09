@@ -46,15 +46,18 @@ using UnityEngine;
 [OregoContext]
 public sealed class MyApplication : Element, ISingletonElement
 {
+    public static MyApplication instance { get; private set; }
+
     public void OnBecameSingleton()
     {
-        Debug.Log("Hello world!");
+        Debug.Log("My app is a singleton!");
+        instance = this;
     }
 }
 ```
 
 ### Add _MainScript.cs_ to your Game Object and play Unity:
->  Hello World!
+>  My app is a singleton!
 ---
 
 ### Create your First Element Layer
@@ -74,10 +77,10 @@ public interface IRepository : IElement
 [OregoContext]
 public sealed class UserRepository : Element, IRepository
 {
-    public override void OnStart()
+    public override void OnCreate()
     {
-        base.OnStart();
-        Debug.Log("User repository is started!");
+        base.OnCreate();
+        Debug.Log("User repository is created!");
     }
 }
 ```
@@ -105,7 +108,7 @@ public sealed class MyApplication : Element, ISingletonElement
     
     public void OnBecameSingleton()
     {
-        Debug.Log("Hello world!");
+        Debug.Log("My app is a singleton!");
     }
 
     public override void OnCreate()
@@ -117,6 +120,6 @@ public sealed class MyApplication : Element, ISingletonElement
 ```
 
 ### Play Unity:
->  Hello World!
+>  My app is a singleton!
 
->  User repository is started!
+>  User repository is created!
