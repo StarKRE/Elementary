@@ -48,13 +48,13 @@ public sealed class MyApplication : Element, ISingletonElement
 {
     public void OnBecameSingleton()
     {
-        Debug.Log("My app is a singleton!");
+        Debug.Log("My application is a singleton!");
     }
 }
 ```
 
 ### Add _MainScript.cs_ to your Game Object and play Unity:
->  My app is a singleton!
+>  My application is a singleton!
 ---
 
 ### Create your First Element Layer
@@ -92,7 +92,7 @@ public sealed class RepositoryLayer : ElementLayer<IRepository>
 }
 ```
 
-#### 3.) Connect the repository layer to the my app
+#### 3.) Connect the repository layer to the application
 
 ```csharp
 using OregoFramework.Core;
@@ -105,7 +105,7 @@ public sealed class MyApplication : Element, ISingletonElement
     
     public void OnBecameSingleton()
     {
-        Debug.Log("My app is a singleton!");
+        Debug.Log("My application is a singleton!");
     }
 
     public override void OnCreate()
@@ -117,6 +117,6 @@ public sealed class MyApplication : Element, ISingletonElement
 ```
 
 ### Play Unity:
->  My app is a singleton!
+>  My application is a singleton!
 
 >  User repository is created!
