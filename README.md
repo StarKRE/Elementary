@@ -19,7 +19,38 @@ public sealed class MainScript : MonoBehaviour
         Orego.Start();
     }
 }
-
-
-
 ```
+
+### Create your first element
+
+```csharp
+using OregoFramework.Core;
+
+[OregoContext]
+public sealed class MyApplication : Element
+{
+}
+```
+
+### Add interface ISingletonElement and debug message
+
+```csharpusing OregoFramework.Core;
+using UnityEngine;
+
+[OregoContext]
+public sealed class MyApplication : Element, ISingletonElement
+{
+    public void OnBecameSingleton()
+    {
+        Debug.Log("Hello world!");
+    }
+}
+```
+
+### Add MainScript.cs to your game object and launch.
+
+
+
+
+
+
