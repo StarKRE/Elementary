@@ -21,6 +21,8 @@ public sealed class MainScript : MonoBehaviour
 }
 ```
 
+---
+
 ### Create your First Element
 
 ```csharp
@@ -49,9 +51,10 @@ public sealed class MyApplication : Element, ISingletonElement
 ```
 
 ### Add MainScript.cs to your game object and play.
+#### Prints:
+>  Hello World!
 
-![image](https://user-images.githubusercontent.com/22048950/87091720-d24b4600-c242-11ea-9491-841d5aa31b48.png)
-
+---
 
 ### Create your First Element Layer
 
