@@ -3,8 +3,8 @@
 
 
 ### Design Your Architecture
-Library support Unity 2019.1.8f and later 
-[Download v.1.3](https://github.com/StarKRE/Orego/releases/download/v.1.3/Orego.unitypackage)
+... Library support Unity 2019.1.8f and later 
+... [Download v.1.3](https://github.com/StarKRE/Orego/releases/download/v.1.3/Orego.unitypackage)
 
 
 ### How to start?
