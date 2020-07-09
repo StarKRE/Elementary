@@ -32,9 +32,12 @@ public sealed class MyApplication : Element
 }
 ```
 
-### Add interface ISingletonElement and debug message
+- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
 
-```csharpusing OregoFramework.Core;
+### Add interface.
+
+```csharp
+using OregoFramework.Core;
 using UnityEngine;
 
 [OregoContext]
@@ -48,9 +51,7 @@ public sealed class MyApplication : Element, ISingletonElement
 ```
 
 ### Add MainScript.cs to your game object and launch.
-
-
-
+![image](https://user-images.githubusercontent.com/22048950/87091531-7f718e80-c242-11ea-9579-229a38977b67.png)
 
 
 
