@@ -51,7 +51,6 @@ public sealed class MyApplication : Element, ISingletonElement
 ```
 
 ### Add MainScript.cs to your game object and play.
-#### Prints:
 >  Hello World!
 
 ---
@@ -114,6 +113,5 @@ public sealed class MyApplication : Element, ISingletonElement
     }
 }
 ```
-
-#### Result:
-![image](https://user-images.githubusercontent.com/22048950/87093956-b6e23a00-c246-11ea-859a-8a5a64044d26.png)
+>  Hello World!
+>  User repository started!
