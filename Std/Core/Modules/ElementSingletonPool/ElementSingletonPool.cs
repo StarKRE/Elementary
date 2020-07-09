@@ -100,7 +100,7 @@ namespace OregoFramework.Core
 
             foreach (var singleton in this.singletons)
             {
-                singleton.OnDestroy();
+                singleton.OnDispose();
             }
 
             this.singletons.Clear();

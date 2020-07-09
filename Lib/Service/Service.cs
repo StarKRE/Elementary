@@ -50,7 +50,7 @@ namespace OregoFramework.Service
         {
         }
 
-        void IElement.OnDestroy()
+        void IElement.OnDispose()
         {
         }
     }

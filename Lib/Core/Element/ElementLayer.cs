@@ -47,10 +47,10 @@ namespace OregoFramework.Core
             }
         }
 
-        public override void OnDestroy()
+        public override void OnDispose()
         {
             this.childElementMap.Clear();
-            base.OnDestroy();
+            base.OnDispose();
         }
     }
 }

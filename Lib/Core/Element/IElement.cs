@@ -43,6 +43,6 @@ namespace OregoFramework.Core
         ///     You can use this callback as destructor to disponse your fields, properties and
         ///     inner resources.
         /// </summary>
-        void OnDestroy();
+        void OnDispose();
     }
 }

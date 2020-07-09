@@ -14,18 +14,18 @@ namespace OregoFramework.Core
         /// <summary>
         ///     <para>Creates the Orego element instances.</para>
         /// </summary>
-        private IElementCreator elementCreator;
+        private IElementCreator _elementCreator;
 
-        private IElementCreator ElementCreator
+        private IElementCreator elementCreator
         {
             get
             {
-                if (this.elementCreator == null)
+                if (this._elementCreator == null)
                 {
-                    this.elementCreator = Orego.GetObject<IElementCreator>(nameof(IElementCreator));
+                    this._elementCreator = Orego.GetObject<IElementCreator>(nameof(IElementCreator));
                 }
 
-                return this.elementCreator;
+                return this._elementCreator;
             }
         }
 
@@ -36,15 +36,11 @@ namespace OregoFramework.Core
             this.childElements = new HashSet<IElement>();
         }
 
-        #region OnCreate
+        #region Lifecycle
 
         public virtual void OnCreate()
         {
         }
-
-        #endregion
-
-        #region OnPrepare
 
         public virtual void OnPrepare()
         {
@@ -54,10 +50,6 @@ namespace OregoFramework.Core
             }
         }
 
-        #endregion
-
-        #region OnReady
-
         public virtual void OnReady()
         {
             foreach (var childElement in this.childElements)
@@ -65,10 +57,6 @@ namespace OregoFramework.Core
                 childElement.OnReady();
             }
         }
-
-        #endregion
-
-        #region OnStart
 
         public virtual void OnStart()
         {
@@ -78,10 +66,6 @@ namespace OregoFramework.Core
             }
         }
 
-        #endregion
-
-        #region OnStop
-
         public virtual void OnFinish()
         {
             foreach (var childElement in this.childElements)
@@ -90,15 +74,12 @@ namespace OregoFramework.Core
             }
         }
 
-        #endregion
 
-        #region OnDestroy
-
-        public virtual void OnDestroy()
+        public virtual void OnDispose()
         {
             foreach (var childElement in this.childElements)
             {
-                childElement.OnDestroy();
+                childElement.OnDispose();
             }
 
             this.childElements.Clear();
@@ -140,7 +121,7 @@ namespace OregoFramework.Core
         /// </example>
         protected T CreateElement<T>(Type type) where T : IElement
         {
-            var childElement = this.ElementCreator.CreateElement<T>(type);
+            var childElement = this.elementCreator.CreateElement<T>(type);
             this.InitElement(childElement);
             return childElement;
         }
@@ -176,7 +157,7 @@ namespace OregoFramework.Core
         /// </example>
         protected IEnumerable<T> CreateElements<T>() where T : IElement
         {
-            var childElements = this.ElementCreator.CreateElements<T>();
+            var childElements = this.elementCreator.CreateElements<T>();
             foreach (var childElement in childElements)
             {
                 this.InitElement(childElement);

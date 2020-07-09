@@ -101,9 +101,9 @@ namespace OregoFramework.App
             }
         }
 
-        public override void OnDestroy()
+        public override void OnDispose()
         {
-            base.OnDestroy();
+            base.OnDispose();
             GameObject.Destroy(this.unityServiceGameObject.gameObject);
         }
 
