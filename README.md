@@ -59,7 +59,7 @@ public sealed class MyApplication : Element, ISingletonElement
 
 ### Create your First Element Layer
 
-For example we create a repository layer:
+For example we will create a repository layer:
 
 #### 1.) Create a repository
 
