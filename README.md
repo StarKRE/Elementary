@@ -27,6 +27,15 @@ public sealed class MainScript : MonoBehaviour
 
 ### Create a Simple Game Architecture 
 
+Example:
+MyGame (Root)
+- GameManager (Game)
+- Interactors (Business logic)
+- Repositories (Data logic)
+- Client (Network)
+    
+
+
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
