@@ -1,13 +1,11 @@
 # Elementary. Unity Framework
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Download](https://img.shields.io/github/downloads/StarKRE/Elementary/v.1.4/total?color=green&label=download%20v.1.4)](https://github.com/StarKRE/Elementary/releases/download/v.1.4/Elementary.unitypackage)
 
 
 ### DESIGN YOUR ARCHITECTURE ELEMENTARY
 
-> Library support Unity 2019.1.8f and later.
-
-> [Download v.1.4](https://github.com/StarKRE/Elementary/releases/download/v.1.4/Elementary.unitypackage)
-
+> Library supports Unity 2019.1.8f and later.
 
 ### How to start?
 Create a **GameObject** on scene and add **MainScript.cs**:
