@@ -52,8 +52,8 @@ public sealed class MyGame : Element, IRootElement
 > Console:  **Hello world!**
 
 ---
-
-Create **Client** class
+### Create Client
+1. Create **Client** class
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
@@ -73,7 +73,7 @@ public sealed class Client : Element, IClient
 }
 
 ```
-Update **MyGame.cs**
+2. Update **MyGame.cs**
 ```csharp
 using ElementaryFramework.Core;
 
@@ -89,10 +89,41 @@ public sealed class MyGame : Element, IRootElement
     }
 }
 ```
-**Play Unity**
+3. **Play Unity**
 > Console: **Client is created!**
 
 ### Create Repository Layer
+1. Create abstract **Repository** class and provide client
+```csharp
+using ElementaryFramework.Core;
+using UnityEngine;
 
+public abstract class Repository : Element
+{
+    protected IClient client { get; private set; }
 
+    public override void OnCreate(IElementContext context)
+    {
+        base.OnCreate(context);
+        Debug.Log($"Repository {this.GetType().Name} is created!");
+    }
+
+    //OnPrepare is called after all elements are created 
+    public override void OnPrepare()
+    {
+        base.OnPrepare();
+        this.client = this.GetRoot<App>().client; //Provide client
+    }
+}
+```
+2. Create **RepositoryLayer** for repositories
+
+```csharp
+using ElementaryFramework.Core;
+
+[Using]
+public sealed class RepositoryLayer : ElementLayer<Repository> //Repositories will created automatically
+{
+}
+```csharp
 
