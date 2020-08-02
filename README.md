@@ -254,29 +254,10 @@ public sealed class LevelsInteractor : Interactor
 }
 ```
 
-3. Create **DomainLayer** for interactors
+3. Update **MyGame.cs**
+
 ```csharp
 using System.Collections.Generic;
-using ElementaryFramework.Core;
-
-[Using]
-public sealed class DomainLayer : ElementLayer<Interactor>
-{
-    public T GetInteractor<T>() where T : Interactor
-    {
-        return this.GetElement<T>();
-    }
-
-    public IEnumerable<T> GetInteractors<T>() where T : Interactor
-    {
-        return this.GetElements<T>();
-    }
-}
-```
-
-4. Update **MyGame.cs**
-
-```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
 
@@ -287,7 +268,7 @@ public sealed class App : Element, IRootElement
 
     public RepositoryLayer repositoryLayer { get; private set; }
     
-    public DomainLayer domainLayer { get; private set; }
+    public IEnumerable<Interactor> interactors { get; private set; }
     
     public override void OnCreate(IElementContext context)
     {
@@ -295,7 +276,7 @@ public sealed class App : Element, IRootElement
         Debug.Log("Hello world!");
         this.client = this.CreateElement<IClient>(typeof(Client));
         this.repositoryLayer = this.CreateElement<RepositoryLayer>(typeof(RepositoryLayer));
-        this.domainLayer = this.CreateElement<DomainLayer>(typeof(DomainLayer));
+        this.interactors = this.CreateElements<Interactor>();
     }
 }
 ```
