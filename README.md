@@ -28,7 +28,7 @@ public sealed class MainScript : MonoBehaviour
 ## Create a Simple Game Architecture (Example)
 ![image](https://user-images.githubusercontent.com/22048950/89131144-48c22780-d513-11ea-9186-78a81ce11d09.png)
 
-### I. Create The Root Application Class
+### I. Create Root Application Class
 1. Create **MyGame** class
 ```csharp
 using ElementaryFramework.Core;
@@ -97,7 +97,7 @@ public sealed class MyGame : Element, IRootElement
 > Console: **Client is created!**
 
 ### III. Create Repository Layer
-1. Create abstract **Repository** class and provide client
+1. Create abstract **Repository** class and provide **Client**
 
 ```csharp
 using ElementaryFramework.Core;
@@ -147,9 +147,15 @@ public sealed class LevelsRepository : Repository
 ```csharp
 using ElementaryFramework.Core;
 
+//Keeps all repositories
+//They are created automatically
 [Using]
-public sealed class RepositoryLayer : ElementLayer<Repository> //Repositories are created automatically
+public sealed class RepositoryLayer : ElementLayer<Repository> 
 {
+    public T GetRepository<T>() where T : Repository
+    {
+        return this.GetElement<T>();
+    }
 }
 ```
 
@@ -185,3 +191,114 @@ public sealed class App : Element, IRootElement
 
 > Console: **LevelsRepository is created!**
 
+### IV. Create Domain Layer
+1. Create abstract **Interactor** class and provide **RepositoryLayer**
+
+```csharp
+using ElementaryFramework.Core;
+
+public abstract class Interactor : Element
+{
+    private RepositoryLayer repositoryLayer;
+
+    public override void OnPrepare()
+    {
+        base.OnPrepare();
+        this.repositoryLayer = this.GetRoot<App>().repositoryLayer;
+    }
+    
+    protected T GetRepository<T>() where T : Repository
+    {
+        return this.repositoryLayer.GetRepository<T>();
+    }
+}
+```
+2. Create some implementations of **Interactor** for example
+
+```csharp
+using ElementaryFramework.Core;
+using UnityEngine;
+
+
+[Using]
+public sealed class UserInteractor : Interactor
+{
+    public override void OnPrepare()
+    {
+        base.OnPrepare();
+        var userRepository = this.GetRepository<UserRepository>();
+        Debug.Log($"User interactor get {userRepository.GetType().Name}");
+    }
+}
+
+[Using]
+public sealed class LevelsInteractor : Interactor
+{
+    public override void OnPrepare()
+    {
+        base.OnPrepare();
+        var levelsRepository = this.GetRepository<LevelsRepository>();
+        Debug.Log($"Levels interactor get {levelsRepository.GetType().Name}");
+    }
+}
+```
+
+3. Create **DomainLayer** for interactors
+```csharp
+using System.Collections.Generic;
+using ElementaryFramework.Core;
+
+[Using]
+public sealed class DomainLayer : ElementLayer<Interactor>
+{
+    public T GetInteractor<T>() where T : Interactor
+    {
+        return this.GetElement<T>();
+    }
+
+    public IEnumerable<T> GetInteractors<T>() where T : Interactor
+    {
+        return this.GetElements<T>();
+    }
+}
+```
+
+4. Update **MyGame.cs**
+
+```csharp
+using ElementaryFramework.Core;
+using UnityEngine;
+
+[Using]
+public sealed class App : Element, IRootElement
+{
+    public IClient client { get; private set; }
+
+    public RepositoryLayer repositoryLayer { get; private set; }
+    
+    public DomainLayer domainLayer { get; private set; }
+    
+    public override void OnCreate(IElementContext context)
+    {
+        base.OnCreate(context);
+        Debug.Log("Hello world!");
+        this.client = this.CreateElement<IClient>(typeof(Client));
+        this.repositoryLayer = this.CreateElement<RepositoryLayer>(typeof(RepositoryLayer));
+        this.domainLayer = this.CreateElement<DomainLayer>(typeof(DomainLayer));
+    }
+}
+```
+
+5. **Play Unity**
+
+> Console: **Hello world!**
+
+> Console: **Client is created!**
+
+> Console: **UserRepository is created!**
+
+> Console: **LevelsRepository is created!**
+
+> Console: **User interactor get UserRepository**
+
+> Console: **Levels interactor get LevelsRepository**
