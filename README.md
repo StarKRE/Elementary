@@ -1,4 +1,4 @@
-# Orego. Unity Framework
+# Elementary. Unity Framework
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
 
@@ -6,55 +6,50 @@
 
 > Library support Unity 2019.1.8f and later.
 
-> [Download v.1.3](https://github.com/StarKRE/Orego/releases/download/v.1.3/Orego.unitypackage)
+> [Download v.1.4](https://github.com/StarKRE/Elementary/releases/download/v.1.4/Elementary.unitypackage)
 
 
 ### How to start?
 
 ```csharp
-using OregoFramework.Core;
+using ElementaryFramework.Core;
 using UnityEngine;
 
 public sealed class MainScript : MonoBehaviour
 {
     private void Start()
     {
-        Orego.Start();
+        Elementary.Initialize();
     }
 }
 ```
 ---
 
-### Create your First Element
+### Create a simple game architecture 
 
 ```csharp
-using OregoFramework.Core;
-
-[OregoContext]
-public sealed class MyApplication : Element
-{
-}
-```
-
-### Add Singleton Interface
-The framework creates an instance automatically
-
-```csharp
-using OregoFramework.Core;
+using ElementaryFramework.Core;
 using UnityEngine;
 
-[OregoContext]
-public sealed class MyApplication : Element, ISingletonElement
+[Using]
+public sealed class MyGame : Element, IRootElement
 {
-    public void OnBecameSingleton()
+    public override void OnCreate(IElementContext context)
     {
-        Debug.Log("My application is a singleton!");
+        base.OnCreate(context);
+        Debug.Log("Hello world!");
     }
 }
 ```
 
-### Add _MainScript.cs_ to your Game Object and play Unity:
->  My application is a singleton!
+### Add _MainScript.cs_ to a GameObject:
+
+### Play Unity
+The framework creates the root instance automatically.
+>Console:  Hello world!
+
+
+
 ---
 
 ### Create your First Element Layer
