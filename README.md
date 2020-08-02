@@ -4,9 +4,7 @@
 [![Download](https://img.shields.io/github/downloads/StarKRE/Elementary/v.1.4/total?color=green&label=download%20v.1.4)](https://github.com/StarKRE/Elementary/releases/download/v.1.4/Elementary.unitypackage)
 
 
-### DESIGN YOUR ARCHITECTURE ELEMENTARY
-
-> Library supports Unity 2019.1.8f and later.
+## DESIGN YOUR ARCHITECTURE ELEMENTARY
 
 ### How to start?
 Create a **GameObject** on scene and add **MainScript.cs**:
