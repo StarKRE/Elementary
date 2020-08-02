@@ -100,6 +100,9 @@ public sealed class MyGame : Element, IRootElement
 
 > Console: **Client is created!**
 
+## DONE!
+![image](https://user-images.githubusercontent.com/22048950/89132192-14eb0000-d51b-11ea-8801-b2eb18e6f6db.png)
+
 ### III. Create Repository Layer
 1. Create abstract **Repository** class and provide **Client**
 
