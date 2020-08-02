@@ -198,6 +198,10 @@ public sealed class App : Element, IRootElement
 
 > Console: **LevelsRepository is created!**
 
+## DONE!
+![image](https://user-images.githubusercontent.com/22048950/89132224-524f8d80-d51b-11ea-9fa7-5f3795819bcd.png)
+
+
 ### IV. Create Domain Layer
 1. Create abstract **Interactor** class and provide **RepositoryLayer**
 
