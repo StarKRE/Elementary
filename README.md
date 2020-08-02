@@ -52,6 +52,10 @@ public sealed class MyGame : Element, IRootElement
 2. **Play Unity**
 > Console:  **Hello world!**
 
+## DONE!
+![image](https://user-images.githubusercontent.com/22048950/89132169-d5bcaf00-d51a-11ea-9721-47508a2799d2.png)
+
+
 ---
 ### II. Create Client
 1. Create **Client** class
