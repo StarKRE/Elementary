@@ -314,6 +314,6 @@ public sealed class App : Element, IRootElement
 
 > Console: **Levels interactor get LevelsRepository**
 
-## COMPLETE
+## COMPLETE!
 ![image](https://user-images.githubusercontent.com/22048950/89132255-9347a200-d51b-11ea-9b76-03ff8b1230f3.png)
 
