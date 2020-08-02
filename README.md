@@ -10,7 +10,7 @@
 
 
 ### How to start?
-Create a _GameObject_ on Scene and add _MainScript.cs_:
+Create a **GameObject** on scene and add **MainScript.cs**:
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
@@ -43,13 +43,13 @@ public sealed class MyGame : Element, IRootElement
     }
 }
 ```
-- [Using] - MyGame class is registered into the framework.
-- Element - the base class.
-- IRootElement - MyGame class is created automatically.
-- OnCreate is called after constructor.
+- **[Using]** - **MyGame** class is registered into the framework.
+- **Element** - the base class.
+- **IRootElement** - **MyGame** class is created automatically.
+- **OnCreate** is called after constructor.
 
 Play Unity
-> Console:  Hello world!
+> Console:  **Hello world!**
 
 ---
 
@@ -69,7 +69,7 @@ public sealed class GameManager : Element
 }
 
 ```
-Update _MyGame.cs_
+Update **MyGame.cs**
 ```csharp
 using ElementaryFramework.Core;
 
@@ -86,7 +86,7 @@ public sealed class MyGame : Element, IRootElement
 }
 ```
 Play Unity
-> Console: Game manager is created!
+> Console: **Game manager is created!**
 
 
 
