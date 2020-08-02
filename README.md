@@ -26,8 +26,7 @@ public sealed class MainScript : MonoBehaviour
 ---
 
 ## Create a Simple Game Architecture (Example)
-
-![image](https://user-images.githubusercontent.com/22048950/89130934-e4529880-d511-11ea-9021-ab2ae3c48276.png)
+![image](https://user-images.githubusercontent.com/22048950/89131144-48c22780-d513-11ea-9186-78a81ce11d09.png)
 
 Create **MyGame** class
 ```csharp
@@ -54,18 +53,18 @@ public sealed class MyGame : Element, IRootElement
 
 ---
 
-### Create your Game Manager
+### Create Client class
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
 
 [Using]
-public sealed class GameManager : Element
+public sealed class Client : Element
 {
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
-        Debug.Log("Game manager is created!");
+        Debug.Log("Client is created!");
     }
 }
 
@@ -77,98 +76,19 @@ using ElementaryFramework.Core;
 [Using]
 public sealed class MyGame : Element, IRootElement
 {
-    private IElement gameManager;
+    private IElement client;
     
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
-        this.gameManager = this.CreateElement<IElement>(typeof(GameManager));
+        this.gameManager = this.CreateElement<IElement>(typeof(Client));
     }
 }
 ```
 **Play Unity**
-> Console: **Game manager is created!**
+> Console: **Client is created!**
+
+### Create DomainLayer class
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Create your First Element Layer
-
-For example we will create a repository layer:
-
-#### 1.) Create a repository
-
-```csharp
-using OregoFramework.Core;
-using UnityEngine;
-
-public interface IRepository : IElement
-{
-}
-
-[OregoContext]
-public sealed class UserRepository : Element, IRepository
-{
-    public override void OnCreate()
-    {
-        base.OnCreate();
-        Debug.Log("User repository is created!");
-    }
-}
-```
-#### 2.) Create a repository layer
-
-```csharp
-using OregoFramework.Core;
-
-[OregoContext]
-public sealed class RepositoryLayer : ElementLayer<IRepository>
-{
-}
-```
-
-#### 3.) Connect the repository layer to the application
-
-```csharp
-using OregoFramework.Core;
-using UnityEngine;
-
-[OregoContext]
-public sealed class MyApplication : Element, ISingletonElement
-{
-    private IElement repositoryLayer;
-    
-    public void OnBecameSingleton()
-    {
-        Debug.Log("My application is a singleton!");
-    }
-
-    public override void OnCreate()
-    {
-        base.OnCreate();
-        this.repositoryLayer = this.CreateElement<IElement>(typeof(RepositoryLayer));
-    }
-}
-```
-
-### Play Unity:
->  My application is a singleton!
-
->  User repository is created!
