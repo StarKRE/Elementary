@@ -45,9 +45,9 @@ public sealed class MyGame : Element, IRootElement
 }
 ```
 - **[Using]** - **MyGame** class is registered into the framework as **Element**
-- **Element** - the base class.
-- **IRootElement** - **MyGame** class is created automatically.
-- **OnCreate** is called after constructor.
+- **Element** - the base class
+- **IRootElement** - **MyGame** class is created automatically
+- **OnCreate** is called after constructor
 
 2. **Play Unity**
 > Console:  **Hello world!**
