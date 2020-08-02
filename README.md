@@ -86,28 +86,25 @@ public sealed class MyGame : Element, IRootElement
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
-        this.gameManager = this.CreateElement<IClient>(typeof(Client));
+        Debug.Log("Hello world!");
+        this.client = this.CreateElement<IClient>(typeof(Client));
     }
 }
 ```
 3. **Play Unity**
+> Console: **Hello world!**
+
 > Console: **Client is created!**
 
 ### III. Create Repository Layer
 1. Create abstract **Repository** class and provide client
+
 ```csharp
 using ElementaryFramework.Core;
-using UnityEngine;
 
 public abstract class Repository : Element
 {
     protected IClient client { get; private set; }
-
-    public override void OnCreate(IElementContext context)
-    {
-        base.OnCreate(context);
-        Debug.Log($"{this.GetType().Name} is created!");
-    }
 
     //OnPrepare is called after all elements are created 
     public override void OnPrepare()
@@ -122,15 +119,26 @@ public abstract class Repository : Element
 
 ```csharp
 using ElementaryFramework.Core;
+using UnityEngine;
 
 [Using]
 public sealed class UserRepository : Repository
 {
+    public override void OnCreate(IElementContext context)
+    {
+        base.OnCreate(context);
+        Debug.Log("UserRepository is created!");
+    }
 }
 
 [Using]
 public sealed class LevelsRepository : Repository
 {
+    public override void OnCreate(IElementContext context)
+    {
+        base.OnCreate(context);
+        Debug.Log("LevelsRepository is created!");
+    }
 }
 ```
 
@@ -160,6 +168,7 @@ public sealed class App : Element, IRootElement
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
+        Debug.Log("Hello world!");
         this.client = this.CreateElement<IClient>(typeof(Client));
         this.repositoryLayer = this.CreateElement<RepositoryLayer>(typeof(RepositoryLayer));
     }
@@ -168,4 +177,11 @@ public sealed class App : Element, IRootElement
 
 5. **Play Unity**
 
-UserRepository is created!
+> Console: **Hello world!**
+
+> Console: **Client is created!**
+
+> Console: **UserRepository is created!**
+
+> Console: **LevelsRepository is created!**
+
