@@ -28,7 +28,8 @@ public sealed class MainScript : MonoBehaviour
 ## Create a Simple Game Architecture (Example)
 ![image](https://user-images.githubusercontent.com/22048950/89131144-48c22780-d513-11ea-9186-78a81ce11d09.png)
 
-Create **MyGame** class
+### I. Create the Root
+1. Create **MyGame** class
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
@@ -48,11 +49,11 @@ public sealed class MyGame : Element, IRootElement
 - **IRootElement** - **MyGame** class is created automatically.
 - **OnCreate** is called after constructor.
 
-**Play Unity**
+2. **Play Unity**
 > Console:  **Hello world!**
 
 ---
-### Create Client
+### II. Create Client
 1. Create **Client** class
 ```csharp
 using ElementaryFramework.Core;
@@ -92,7 +93,7 @@ public sealed class MyGame : Element, IRootElement
 3. **Play Unity**
 > Console: **Client is created!**
 
-### Create Repository Layer
+### III. Create Repository Layer
 1. Create abstract **Repository** class and provide client
 ```csharp
 using ElementaryFramework.Core;
@@ -105,7 +106,7 @@ public abstract class Repository : Element
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
-        Debug.Log($"Repository {this.GetType().Name} is created!");
+        Debug.Log($"{this.GetType().Name} is created!");
     }
 
     //OnPrepare is called after all elements are created 
@@ -116,14 +117,55 @@ public abstract class Repository : Element
     }
 }
 ```
-2. Create **RepositoryLayer** for repositories
+
+2. Create some implementations of **Repository** for example
 
 ```csharp
 using ElementaryFramework.Core;
 
 [Using]
-public sealed class RepositoryLayer : ElementLayer<Repository> //Repositories will created automatically
+public sealed class UserRepository : Repository
 {
 }
-```csharp
 
+[Using]
+public sealed class LevelsRepository : Repository
+{
+}
+```
+
+3. Create **RepositoryLayer** for repositories
+
+```csharp
+using ElementaryFramework.Core;
+
+[Using]
+public sealed class RepositoryLayer : ElementLayer<Repository> //Repositories are created automatically
+{
+}
+```
+
+4. Update **MyGame.cs**
+
+```csharp
+using ElementaryFramework.Core;
+
+[Using]
+public sealed class App : Element, IRootElement
+{
+    public IClient client { get; private set; }
+
+    public RepositoryLayer repositoryLayer { get; private set; }
+    
+    public override void OnCreate(IElementContext context)
+    {
+        base.OnCreate(context);
+        this.client = this.CreateElement<IClient>(typeof(Client));
+        this.repositoryLayer = this.CreateElement<RepositoryLayer>(typeof(RepositoryLayer));
+    }
+}
+```
+
+5. **Play Unity**
+
+UserRepository is created!
