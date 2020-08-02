@@ -12,7 +12,7 @@ namespace ElementaryFramework.Edit
         private static void SelectAssemblyConfigAsset()
         {
             const string path =
-                "Assets/Elementary/Config/Logger/Resources/LoggerConfig.asset";
+                "Assets/Elementary/Modules/Units/Logger/Resources/LoggerConfig.asset";
             Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(path);
         }
     }

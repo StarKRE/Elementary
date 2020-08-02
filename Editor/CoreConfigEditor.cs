@@ -11,7 +11,7 @@ namespace ElementaryFramework.Edit
         [MenuItem("Window/Elementary/Config/Show Core Config...")]
         private static void SelectConfigAsset()
         {
-            const string path = "Assets/Elementary/Config/Core/Resources/CoreConfig.asset";
+            const string path = "Assets/Elementary/Resources/CoreConfig.asset";
             Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(path);
         }
     }
