@@ -41,9 +41,11 @@ public sealed class MyGame : Element, IRootElement
     }
 }
 ```
-> [Using] - MyGame class is registered into Elementary Framework.
-> Element - the base class in the framework.
-> IRootElement - MyGame class is created by the framework automatically.
+> [Using] - MyGame class is registered into the framework.
+
+> Element - the base class.
+
+> IRootElement - MyGame class is created automatically.
 
 ### Play Unity
 The framework creates the root instance automatically.
