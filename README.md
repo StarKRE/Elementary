@@ -25,7 +25,7 @@ public sealed class MainScript : MonoBehaviour
 ```
 ---
 
-### Create a simple game architecture 
+### Create a Simple Game Architecture 
 
 ```csharp
 using ElementaryFramework.Core;
@@ -44,14 +44,67 @@ public sealed class MyGame : Element, IRootElement
 - [Using] - MyGame class is registered into the framework.
 - Element - the base class.
 - IRootElement - MyGame class is created automatically.
+- OnCreate is called after constructor.
 
-### Play Unity
-The framework creates the root instance automatically.
->Console:  Hello world!
-
-
+Play Unity
+> Console:  Hello world!
 
 ---
+
+### Create your Game Manager
+```csharp
+using ElementaryFramework.Core;
+using UnityEngine;
+
+[Using]
+public sealed class GameManager : Element
+{
+    public override void OnCreate(IElementContext context)
+    {
+        base.OnCreate(context);
+        Debug.Log("Game manager is created!");
+    }
+}
+
+```
+Update _MyGame.cs_
+```csharp
+using ElementaryFramework.Core;
+
+[Using]
+public sealed class MyGame : Element, IRootElement
+{
+    private IElement gameManager;
+    
+    public override void OnCreate(IElementContext context)
+    {
+        base.OnCreate(context);
+        this.gameManager = this.CreateElement<IElement>(typeof(GameManager));
+    }
+}
+```
+Play Unity
+> Console: Game manager is created!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Create your First Element Layer
 
