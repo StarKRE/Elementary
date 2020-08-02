@@ -10,7 +10,7 @@
 
 
 ### How to start?
-
+Create a _GameObject_ on Scene and add _MainScript.cs_:
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
@@ -41,8 +41,9 @@ public sealed class MyGame : Element, IRootElement
     }
 }
 ```
-
-### Add _MainScript.cs_ to a GameObject:
+> [Using] - MyGame class is registered into Elementary Framework.
+> Element - the base class in the framework.
+> IRootElement - MyGame class is created by the framework automatically.
 
 ### Play Unity
 The framework creates the root instance automatically.
