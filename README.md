@@ -37,6 +37,7 @@ using UnityEngine;
 [Using]
 public sealed class MyGame : Element, IRootElement
 {
+    //OnCreate is called after constructor
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
@@ -46,8 +47,7 @@ public sealed class MyGame : Element, IRootElement
 ```
 - **[Using]** - **MyGame** class is registered into the framework as **Element**
 - **Element** - the base class
-- **IRootElement** - **MyGame** class is created automatically
-- **OnCreate** is called after constructor
+- **IRootElement** - **MyGame** class is root element into system. It is created automatically.
 
 2. **Play Unity**
 > Console:  **Hello world!**
