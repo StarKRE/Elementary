@@ -28,7 +28,8 @@ public sealed class MainScript : MonoBehaviour
 ## Create a Simple Game Architecture (Example)
 
 ![image](https://user-images.githubusercontent.com/22048950/89130934-e4529880-d511-11ea-9021-ab2ae3c48276.png)
-    
+
+Create **MyGame** class
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
@@ -48,7 +49,7 @@ public sealed class MyGame : Element, IRootElement
 - **IRootElement** - **MyGame** class is created automatically.
 - **OnCreate** is called after constructor.
 
-Play Unity
+**Play Unity**
 > Console:  **Hello world!**
 
 ---
@@ -85,7 +86,7 @@ public sealed class MyGame : Element, IRootElement
     }
 }
 ```
-Play Unity
+**Play Unity**
 > Console: **Game manager is created!**
 
 
