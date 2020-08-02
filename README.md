@@ -117,7 +117,7 @@ public abstract class Repository : Element
     public override void OnPrepare()
     {
         base.OnPrepare();
-        this.client = this.GetRoot<App>().client; //Provide client
+        this.client = this.GetRoot<MyGame>().client; //Provide client
     }
 }
 ```
@@ -172,7 +172,7 @@ public sealed class RepositoryLayer : ElementLayer<Repository>
 using ElementaryFramework.Core;
 
 [Using]
-public sealed class App : Element, IRootElement
+public sealed class MyGame : Element, IRootElement
 {
     public IClient client { get; private set; }
 
@@ -215,7 +215,7 @@ public abstract class Interactor : Element
     public override void OnPrepare()
     {
         base.OnPrepare();
-        this.repositoryLayer = this.GetRoot<App>().repositoryLayer;
+        this.repositoryLayer = this.GetRoot<MyGame>().repositoryLayer;
     }
     
     protected T GetRepository<T>() where T : Repository
@@ -262,7 +262,7 @@ using ElementaryFramework.Core;
 using UnityEngine;
 
 [Using]
-public sealed class App : Element, IRootElement
+public sealed class MyGame : Element, IRootElement
 {
     public IClient client { get; private set; }
 
