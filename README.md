@@ -28,7 +28,7 @@ public sealed class MainScript : MonoBehaviour
 ## Create a Simple Game Architecture (Example)
 ![image](https://user-images.githubusercontent.com/22048950/89131144-48c22780-d513-11ea-9186-78a81ce11d09.png)
 
-### I. Create the Root
+### I. Create Root Application Class
 1. Create **MyGame** class
 ```csharp
 using ElementaryFramework.Core;
