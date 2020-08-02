@@ -53,13 +53,17 @@ public sealed class MyGame : Element, IRootElement
 
 ---
 
-### Create Client class
+Create **Client** class
 ```csharp
 using ElementaryFramework.Core;
 using UnityEngine;
 
+public interface IClient : IElement
+{
+}
+
 [Using]
-public sealed class Client : Element
+public sealed class Client : Element, IClient
 {
     public override void OnCreate(IElementContext context)
     {
@@ -76,19 +80,19 @@ using ElementaryFramework.Core;
 [Using]
 public sealed class MyGame : Element, IRootElement
 {
-    private IElement client;
+    public IClient client { get; private set; }
     
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
-        this.gameManager = this.CreateElement<IElement>(typeof(Client));
+        this.gameManager = this.CreateElement<IClient>(typeof(Client));
     }
 }
 ```
 **Play Unity**
 > Console: **Client is created!**
 
-### Create DomainLayer class
+### Create Repository Layer
 
 
 
