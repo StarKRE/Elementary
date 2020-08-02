@@ -8,7 +8,7 @@ namespace ElementaryFramework.Core
     /// </summary>
     [CreateAssetMenu(
         fileName = "CoreConfig",
-        menuName = "Orego/Config/New CoreConfig"
+        menuName = "Elementary/Config/New CoreConfig"
     )]
     public sealed class CoreConfig : ScriptableObject
     {
