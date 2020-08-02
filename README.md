@@ -27,8 +27,8 @@ public sealed class MainScript : MonoBehaviour
 
 ### Create a Simple Game Architecture 
 
-Example:
-MyGame (Root)
+For example:
+> **MyGame (Root)**
 - GameManager (Game)
 - Interactors (Business logic)
 - Repositories (Data logic)
