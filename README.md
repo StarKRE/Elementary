@@ -97,7 +97,7 @@ public sealed class MyGame : Element, IRootElement
 
 > Console: **Client is created!**
 
-## DONE!
+## ✅ DONE!
 ![image](https://user-images.githubusercontent.com/22048950/89132192-14eb0000-d51b-11ea-8801-b2eb18e6f6db.png)
 
 ### III. Create Repository Layer
@@ -195,7 +195,7 @@ public sealed class MyGame : Element, IRootElement
 
 > Console: **LevelsRepository is created!**
 
-## DONE!
+## ✅ DONE!
 ![image](https://user-images.githubusercontent.com/22048950/89132224-524f8d80-d51b-11ea-9fa7-5f3795819bcd.png)
 
 
@@ -292,6 +292,6 @@ public sealed class MyGame : Element, IRootElement
 
 > Console: **Levels interactor get LevelsRepository**
 
-## COMPLETE!
+## ✅ ✅ ✅ COMPLETE!
 ![image](https://user-images.githubusercontent.com/22048950/89132255-9347a200-d51b-11ea-9b76-03ff8b1230f3.png)
 
