@@ -85,6 +85,7 @@ public sealed class MyGame : Element, IRootElement
 {
     public IClient client { get; private set; }
     
+    //OnCreate is called after constructor
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
@@ -179,6 +180,7 @@ public sealed class MyGame : Element, IRootElement
 
     public RepositoryLayer repositoryLayer { get; private set; }
     
+    //OnCreate is called after constructor
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
@@ -271,7 +273,8 @@ public sealed class MyGame : Element, IRootElement
     public RepositoryLayer repositoryLayer { get; private set; }
     
     public IEnumerable<Interactor> interactors { get; private set; }
-    
+
+    //OnCreate is called after constructor
     public override void OnCreate(IElementContext context)
     {
         base.OnCreate(context);
