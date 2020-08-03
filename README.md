@@ -25,7 +25,7 @@ public sealed class MainScript : MonoBehaviour
 ## Create a Simple Game Architecture (Example)
 ![image](https://user-images.githubusercontent.com/22048950/89131144-48c22780-d513-11ea-9186-78a81ce11d09.png)
 
-### I. Create Root Application Class
+### I. Create The Root Application Class
 1. Create **MyGame** class
 ```csharp
 using ElementaryFramework.Core;
@@ -42,7 +42,7 @@ public sealed class MyGame : Element, IRootElement
     }
 }
 ```
-- **[Using]** - **MyGame** class is registered into the framework as **Element**
+- **[Using]** - **MyGame** class is registered into the framework as **element**
 - **Element** - the base class of the context
 - **IRootElement** - root element in the system. It is created automatically
 
