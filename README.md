@@ -42,7 +42,7 @@ public sealed class MyGame : Element, IRootElement
     }
 }
 ```
-- **[Using]** - **MyGame** class can be used as **element instance** into the framework.
+- **[Using]** - **MyGame** class will be used as **element instance** by the framework.
 - **Element** - **the base** class of the context
 - **IRootElement** - a root element in the system. It is created automatically
 
