@@ -60,6 +60,7 @@ public sealed class MyGame : Element, IRootElement
 using ElementaryFramework.Core;
 using UnityEngine;
 
+//We will use client by interface:
 public interface IClient : IElement
 {
 }
