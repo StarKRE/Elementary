@@ -43,8 +43,8 @@ public sealed class MyGame : Element, IRootElement
 }
 ```
 - **[Using]** - **MyGame** class is registered into the framework as **element**
-- **Element** - the base class of the context
-- **IRootElement** - root element in the system. It is created automatically
+- **Element** - **the base** class of the context
+- **IRootElement** - a root element in the system. It is created automatically
 
 2. **Play Unity**
 > Console:  **Hello world!**
