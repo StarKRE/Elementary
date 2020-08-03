@@ -60,7 +60,7 @@ public sealed class MyGame : Element, IRootElement
 using ElementaryFramework.Core;
 using UnityEngine;
 
-//We will use client by interface:
+//Let's provide our client by interface for the MyGame class:
 public interface IClient : IElement
 {
 }
@@ -115,7 +115,7 @@ public abstract class Repository : Element
     public override void OnPrepare()
     {
         base.OnPrepare();
-        this.client = this.GetRoot<MyGame>().client; //Provide client
+        this.client = this.GetRoot<MyGame>().client; //Provide client from MyGame class
     }
 }
 ```
@@ -157,13 +157,15 @@ using ElementaryFramework.Core;
 [Using]
 public sealed class RepositoryLayer : ElementLayer<Repository> 
 {
-    //Returns a repository. We will use this method from interactors
+    //Returns a repository. We will use this method from interactors later.
     public T GetRepository<T>() where T : Repository
     {
         return this.GetElement<T>();
     }
 }
 ```
+
+- **ElementLayer** - **group of T elements**.
 
 4. Update **MyGame.cs**
 
