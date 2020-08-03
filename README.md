@@ -156,6 +156,7 @@ using ElementaryFramework.Core;
 [Using]
 public sealed class RepositoryLayer : ElementLayer<Repository> 
 {
+    //Returns a repository. We will use this method from interactors
     public T GetRepository<T>() where T : Repository
     {
         return this.GetElement<T>();
@@ -215,6 +216,7 @@ public abstract class Interactor : Element
         this.repositoryLayer = this.GetRoot<MyGame>().repositoryLayer;
     }
     
+    //We write this method to provide repositories for inherited interactor classes
     protected T GetRepository<T>() where T : Repository
     {
         return this.repositoryLayer.GetRepository<T>();
