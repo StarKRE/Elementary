@@ -1,0 +1,5 @@
+/Users/starkre/Projects/Elementary/Elementary/Elementary/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/starkre/Projects/Elementary/Elementary/Elementary/bin/Debug/Elementary.pdb
+/Users/starkre/Projects/Elementary/Elementary/Elementary/bin/Debug/Elementary.dll
+/Users/starkre/Projects/Elementary/Elementary/Elementary/obj/Debug/Elementary.dll
+/Users/starkre/Projects/Elementary/Elementary/Elementary/obj/Debug/Elementary.pdb
