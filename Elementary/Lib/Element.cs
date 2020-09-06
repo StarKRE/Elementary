@@ -17,44 +17,73 @@ namespace Elementary
             this.createdElements = new HashSet<IElement>();
         }
 
-        public virtual void OnCreate(IElementContext context)
+        public void OnCreate(IElementContext context)
         {
             this.context = context;
+            this.OnCreate(this, context);
         }
 
-        public virtual void OnPrepare()
+        protected virtual void OnCreate(Element self, IElementContext context)
+        {
+        }
+
+        public void OnPrepare()
         {
             foreach (var element in this.createdElements)
             {
                 element.OnPrepare();
             }
+
+            this.OnPrepare(this);
         }
 
-        public virtual void OnReady()
+        protected virtual void OnPrepare(Element self)
+        {
+        }
+
+        public void OnReady()
         {
             foreach (var element in this.createdElements)
             {
                 element.OnReady();
             }
+
+            this.OnReady(this);
         }
 
-        public virtual void OnStart()
+        protected virtual void OnReady(Element self)
+        {
+        }
+
+        public void OnStart()
         {
             foreach (var element in this.createdElements)
             {
                 element.OnStart();
             }
+
+            this.OnStart(this);
         }
 
-        public virtual void OnFinish()
+        protected virtual void OnStart(Element self)
+        {
+        }
+
+        public void OnFinish()
         {
             foreach (var element in this.createdElements)
             {
                 element.OnFinish();
             }
+
+            this.OnFinish(this);
         }
 
-        public virtual void OnDispose()
+        protected virtual void OnFinish(Element self)
+        {
+        }
+
+        public void OnDispose()
         {
             foreach (var element in this.createdElements)
             {
@@ -62,6 +91,11 @@ namespace Elementary
             }
 
             this.createdElements.Clear();
+            this.OnDispose(this);
+        }
+
+        protected virtual void OnDispose(Element self)
+        {
         }
 
         protected T CreateElement<T>(Type targetType) where T : IElement
@@ -81,7 +115,7 @@ namespace Elementary
 
             return elements;
         }
-        
+
         protected T GetRootElement<T>() where T : IRootElement
         {
             return this.context.GetRootElement<T>();

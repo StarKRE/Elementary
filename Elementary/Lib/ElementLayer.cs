@@ -11,7 +11,7 @@ namespace Elementary
     public abstract class ElementLayer<T> : Element where T : IElement
     {
         private readonly Dictionary<Type, T> elementMap;
-        
+
         protected ElementLayer()
         {
             this.elementMap = new Dictionary<Type, T>();
@@ -27,21 +27,30 @@ namespace Elementary
             return this.elementMap.Values.OfType<E>();
         }
 
-        public override void OnCreate(IElementContext context)
+        protected sealed override void OnCreate(Element self, IElementContext context)
         {
-            base.OnCreate(context);
             var elements = this.CreateElements<T>();
             foreach (var element in elements)
             {
                 var type = element.GetType();
                 this.elementMap.Add(type, element);
             }
+
+            this.OnCreate(this, context);
         }
 
-        public override void OnDispose()
+        protected virtual void OnCreate(ElementLayer<T> self, IElementContext context)
+        {
+        }
+
+        protected sealed override void OnDispose(Element self)
         {
             this.elementMap.Clear();
-            base.OnDispose();
+            this.OnDispose(this);
+        }
+
+        protected virtual void OnDispose(ElementLayer<T> self)
+        {
         }
     }
 }
