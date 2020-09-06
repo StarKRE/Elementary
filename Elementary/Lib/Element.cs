@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Elementary
 {
@@ -23,7 +24,7 @@ namespace Elementary
             this.OnCreate(this, context);
         }
 
-        protected virtual void OnCreate(Element self, IElementContext context)
+        protected virtual void OnCreate(Element _, IElementContext context)
         {
         }
 
@@ -37,7 +38,7 @@ namespace Elementary
             this.OnPrepare(this);
         }
 
-        protected virtual void OnPrepare(Element self)
+        protected virtual void OnPrepare(Element _)
         {
         }
 
@@ -51,7 +52,7 @@ namespace Elementary
             this.OnReady(this);
         }
 
-        protected virtual void OnReady(Element self)
+        protected virtual void OnReady(Element _)
         {
         }
 
@@ -65,7 +66,7 @@ namespace Elementary
             this.OnStart(this);
         }
 
-        protected virtual void OnStart(Element self)
+        protected virtual void OnStart(Element _)
         {
         }
 
@@ -79,7 +80,7 @@ namespace Elementary
             this.OnFinish(this);
         }
 
-        protected virtual void OnFinish(Element self)
+        protected virtual void OnFinish(Element _)
         {
         }
 
@@ -94,7 +95,7 @@ namespace Elementary
             this.OnDispose(this);
         }
 
-        protected virtual void OnDispose(Element self)
+        protected virtual void OnDispose(Element _)
         {
         }
 

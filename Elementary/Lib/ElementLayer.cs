@@ -27,7 +27,7 @@ namespace Elementary
             return this.elementMap.Values.OfType<E>();
         }
 
-        protected sealed override void OnCreate(Element self, IElementContext context)
+        protected sealed override void OnCreate(Element _, IElementContext context)
         {
             var elements = this.CreateElements<T>();
             foreach (var element in elements)
@@ -39,17 +39,17 @@ namespace Elementary
             this.OnCreate(this, context);
         }
 
-        protected virtual void OnCreate(ElementLayer<T> self, IElementContext context)
+        protected virtual void OnCreate(ElementLayer<T> _, IElementContext context)
         {
         }
 
-        protected sealed override void OnDispose(Element self)
+        protected sealed override void OnDispose(Element _)
         {
             this.elementMap.Clear();
             this.OnDispose(this);
         }
 
-        protected virtual void OnDispose(ElementLayer<T> self)
+        protected virtual void OnDispose(ElementLayer<T> _)
         {
         }
     }
