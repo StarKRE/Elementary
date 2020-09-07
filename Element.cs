@@ -69,7 +69,6 @@ namespace Elementary
         {
         }
 
-
         /// <inheritdoc cref="IElement.OnStart"/>
         public void OnStart()
         {
