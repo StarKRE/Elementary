@@ -6,6 +6,7 @@ namespace Elementary
     using ChildTable = Dictionary<Type, HashSet<Type>>;
     using ParentTable = Dictionary<Type, HashSet<Type>>;
 
+    /// <inheritdoc cref="IElementTableBuilder"/>
     public class ElementTableBuilder : IElementTableBuilder
     {
         private static readonly Type elementType = typeof(IElement);
@@ -15,7 +16,7 @@ namespace Elementary
         private static readonly Type objectType = typeof(object);
 
         /// <summary>
-        ///     <para>Finds element types only in selected assemblies.</para>
+        ///     <para>Finds available element types only in the selected assemblies.</para>
         /// </summary>
         protected virtual HashSet<string> RequiredAssemblies { get; } = new HashSet<string>
         {
@@ -23,6 +24,7 @@ namespace Elementary
             "Assembly-CSharp"
         };
 
+        /// <inheritdoc cref="IElementTableBuilder"/>
         public ElementTables BuildElementTables()
         {
             var elementTables = new ElementTables();

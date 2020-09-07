@@ -4,19 +4,31 @@ using System.Collections.Generic;
 namespace Elementary
 {
     /// <summary>
-    ///     <para>Base implementation of <see cref="IElement"/> in the context.</para>
+    ///     <para>A base element class of element context.</para>
     /// </summary>
     public abstract class Element : IElement
     {
+        /// <summary>
+        ///     <para>A parent context where this element is located.</para>
+        /// </summary>
         private IElementContext context;
 
+        /// <summary>
+        ///     <para>Elements those instantiated by this element.</para>
+        /// </summary>
         private readonly HashSet<IElement> createdElements;
 
+        /// <summary>
+        ///     <para>Any derived element must contains only default constructor.</para>
+        /// </summary>
         protected Element()
         {
             this.createdElements = new HashSet<IElement>();
         }
 
+        #region Lifecycle
+
+        ///<inheritdoc cref="IElement"/>
         public void OnCreate(IElementContext context)
         {
             this.context = context;
@@ -27,6 +39,7 @@ namespace Elementary
         {
         }
 
+        ///<inheritdoc cref="IElement"/>
         public void OnPrepare()
         {
             foreach (var element in this.createdElements)
@@ -41,6 +54,7 @@ namespace Elementary
         {
         }
 
+        ///<inheritdoc cref="IElement"/>
         public void OnReady()
         {
             foreach (var element in this.createdElements)
@@ -55,6 +69,7 @@ namespace Elementary
         {
         }
 
+        ///<inheritdoc cref="IElement"/>
         public void OnStart()
         {
             foreach (var element in this.createdElements)
@@ -69,6 +84,7 @@ namespace Elementary
         {
         }
 
+        ///<inheritdoc cref="IElement"/>
         public void OnFinish()
         {
             foreach (var element in this.createdElements)
@@ -83,6 +99,7 @@ namespace Elementary
         {
         }
 
+        ///<inheritdoc cref="IElement"/>
         public void OnDispose()
         {
             foreach (var element in this.createdElements)
@@ -98,13 +115,17 @@ namespace Elementary
         {
         }
 
-        protected T CreateElement<T>(Type targetType) where T : IElement
+        #endregion
+
+        ///<inheritdoc cref="IElementContext"/>
+        protected T CreateElement<T>(Type implementationType) where T : IElement
         {
-            var element = this.context.CreateElement<T>(targetType);
+            var element = this.context.CreateElement<T>(implementationType);
             this.createdElements.Add(element);
             return element;
         }
 
+        ///<inheritdoc cref="IElementContext"/>
         protected IEnumerable<T> CreateElements<T>() where T : IElement
         {
             var elements = this.context.CreateElements<T>();
@@ -116,11 +137,13 @@ namespace Elementary
             return elements;
         }
 
+        ///<inheritdoc cref="IElementContext"/>
         protected T GetRootElement<T>() where T : IRootElement
         {
             return this.context.GetRootElement<T>();
         }
 
+        ///<inheritdoc cref="IElementContext"/>
         protected IEnumerable<T> GetRootElements<T>() where T : IRootElement
         {
             return this.context.GetRootElements<T>();

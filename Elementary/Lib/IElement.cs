@@ -1,44 +1,45 @@
 namespace Elementary
 {
     /// <summary>
-    ///     <para>Base interface in the element context.</para>
+    ///     <para>A base interface of element context.
+    ///     Any implementation of this interface must contains only default constructor.
     /// </summary>
     public interface IElement
     {
         /// <summary>
         ///     <para>Called after constructor.
-        ///     Use this method to create child elements.</para>
+        ///     Use this method to instantiate child elements of this element.</para>
         /// </summary>
-        /// <param name="context">Element system. Responsibles for all elements.</param>
+        /// <param name="context">A parent context that contains this element.</param>
         void OnCreate(IElementContext context);
 
         /// <summary>
-        ///     <para>Called after all elements are created.
-        ///     Use this method to bind elements each other.</para>
+        ///     <para>Called after all elements have been created in the context.
+        ///     Use this method to provide other elements from the context to this element.</para>
         /// </summary>
         void OnPrepare();
 
         /// <summary>
-        ///     <para>Called after all elements are bound.
-        ///     Use this method to subscribe on other elements.</para>
+        ///     <para>Called after all elements have been prepared in the context.
+        ///     Use this method to subscribe on other elements for this element.</para>
         /// </summary>
         void OnReady();
 
         /// <summary>
-        ///     <para>Called after all elements are ready.
-        ///     Use this method to setup initial state.</para>
+        ///     <para>Called after all elements have been ready in the context.
+        ///     Use this method to setup initial state of this element.</para>
         /// </summary>
         void OnStart();
 
         /// <summary>
-        ///     <para>Called when context is terminating.
-        ///     Use this method to unsubscribe from other elements.</para>
+        ///     <para>Called before parent context is terminating.
+        ///     Use this method to unsubscribe from other elements for this element.</para>
         /// </summary>
         void OnFinish();
 
         /// <summary>
-        ///     <para>Called before destroying context.
-        ///     Use this method to dispose resources.</para>
+        ///     <para>Called when parent context is terminating.
+        ///     Use this method to dispose resources from this element.</para>
         /// </summary>
         void OnDispose();
     }

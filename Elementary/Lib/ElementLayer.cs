@@ -5,28 +5,46 @@ using System.Linq;
 namespace Elementary
 {
     /// <summary>
-    ///     <para>A group of "T" elements.</para>
+    ///    <para>Keeps a element group of "T" type.
+    ///     The group consists of unique elements derived from "T".
+    ///     Use this class to create a new architecture layer of your application.
+    ///     </para>
     /// </summary>
-    /// <typeparam name="T">Interface type.</typeparam>
+    /// <typeparam name="T">Base element type.</typeparam>
     public abstract class ElementLayer<T> : Element where T : IElement
     {
+        /// <summary>
+        ///     <para>Dictionary of unique elements derived from "T".</para>
+        /// </summary>
         private readonly Dictionary<Type, T> elementMap;
 
+        /// <inheritdoc cref="IElement"/>
         protected ElementLayer()
         {
             this.elementMap = new Dictionary<Type, T>();
         }
 
+        /// <summary>
+        ///     <para>Returns a unique element from the dictionary.</para>
+        /// </summary>
+        /// <typeparam name="E">Type of element.</typeparam>
+        /// <returns>Element instance of the specified type.</returns>
         protected E GetElement<E>()
         {
             return this.elementMap.Find<E, T>();
         }
 
+        /// <summary>
+        ///     <para>Returns a group of unique elements derived from "E".</para>
+        /// </summary>
+        /// <typeparam name="E">Base type of elements.</typeparam>
+        /// <returns>Element instances from the dictionary.</returns>
         protected IEnumerable<E> GetElements<E>()
         {
             return this.elementMap.Values.OfType<E>();
         }
 
+        /// <inheritdoc cref="IElement"/>
         protected sealed override void OnCreate(Element _, IElementContext context)
         {
             var elements = this.CreateElements<T>();
@@ -43,6 +61,7 @@ namespace Elementary
         {
         }
 
+        /// <inheritdoc cref="IElement"/>
         protected sealed override void OnDispose(Element _)
         {
             this.elementMap.Clear();

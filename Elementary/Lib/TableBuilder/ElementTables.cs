@@ -5,12 +5,19 @@ using System.Text;
 namespace Elementary
 {
     /// <summary>
-    ///     <para>Keeps two tables with type hierarchy: child and parent.</para>
+    ///     <para>A table wrapper. Keeps two tables: child and parent.
+    ///     They will be used to create instances of elements.</para>
     /// </summary>
     public sealed class ElementTables
     {
+        /// <summary>
+        ///     <para>Child table. Keeps type vs child types.</para>
+        /// </summary>
         public Dictionary<Type, HashSet<Type>> ChildTable { get; }
 
+        /// <summary>
+        ///     <para>Parent table. Keeps type vs parent types.</para>
+        /// </summary>
         public Dictionary<Type, HashSet<Type>> ParentTable { get; }
 
         public ElementTables()
@@ -19,6 +26,10 @@ namespace Elementary
             this.ParentTable = new Dictionary<Type, HashSet<Type>>();
         }
 
+        /// <summary>
+        ///     <para>Use this method to print the tables into console.</para>
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();

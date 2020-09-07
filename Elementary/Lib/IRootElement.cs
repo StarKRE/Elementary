@@ -1,7 +1,9 @@
 namespace Elementary
 {
     /// <summary>
-    ///     <para>A root element in the system. It is created automatically.</para>
+    ///     <para>Main elements that is created automatically in element context.
+    ///     Use this class to create a new independent architecture unit of your application.
+    ///     </para>
     /// </summary>
     public interface IRootElement : IElement
     {

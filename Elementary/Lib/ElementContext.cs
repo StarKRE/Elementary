@@ -5,7 +5,7 @@ using System.Linq;
 namespace Elementary
 {
     /// <summary>
-    /// <para>Main class</para>
+    ///     <para>A base element context.</para>
     /// </summary>
     public class ElementContext : IElementContext
     {
@@ -16,31 +16,32 @@ namespace Elementary
         private static readonly Type elementType = typeof(IElement);
 
         /// <summary>
-        ///      <para>Builds the two next tables.</para>
+        ///      <para>Builds two tables below: child and parent tables.</para>
         /// </summary>
         protected virtual IElementTableBuilder TableBuilder { get; } = new ElementTableBuilder();
 
         /// <summary>
-        ///     <para>Keeps type vs parent types.</para>
-        /// </summary>
-        protected Dictionary<Type, HashSet<Type>> ParentTable { get; private set; }
-        
-        /// <summary>
-        ///     <para>Keeps type vs child types.</para>
+        ///     <para>Child table. Keeps type vs child types.</para>
         /// </summary>
         protected Dictionary<Type, HashSet<Type>> ChildTable { get; private set; }
 
+        /// <summary>
+        ///     <para>Parent table. Keeps type vs parent types.</para>
+        /// </summary>
+        protected Dictionary<Type, HashSet<Type>> ParentTable { get; private set; }
+
         private Dictionary<Type, IRootElement> rootElementMap;
 
+        /// <inheritdoc cref="IElementContext"/>
         public void Initialize()
         {
             var elementTables = this.TableBuilder.BuildElementTables();
             this.ChildTable = elementTables.ChildTable;
             this.ParentTable = elementTables.ParentTable;
-            this.CreateRootElements();
+            this.InstantiateElements();
         }
 
-        private void CreateRootElements()
+        private void InstantiateElements()
         {
             var rootElements = this.CreateElements<IRootElement>();
             this.rootElementMap = new Dictionary<Type, IRootElement>();
@@ -66,6 +67,7 @@ namespace Elementary
             }
         }
 
+        /// <inheritdoc cref="IElementContext"/>
         public void Terminate()
         {
             var rootElements = this.rootElementMap.Values;
@@ -82,25 +84,27 @@ namespace Elementary
             this.rootElementMap.Clear();
         }
 
-        public T CreateElement<T>(Type targetType) where T : IElement
+        ///<inheritdoc cref="IElementContext"/>
+        public T CreateElement<T>(Type implementationType) where T : IElement
         {
             var parentType = typeof(T);
             if (this.ChildTable.TryGetValue(parentType, out var childTypes) &&
-                childTypes.Contains(targetType))
+                childTypes.Contains(implementationType))
             {
-                return this.CreateInstance<T>(targetType);
+                return this.CreateInstance<T>(implementationType);
             }
 
             if (this.ChildTable.TryGetValue(elementType, out var elementTypes) &&
-                elementTypes.Contains(targetType))
+                elementTypes.Contains(implementationType))
             {
-                return this.CreateInstance<T>(targetType);
+                return this.CreateInstance<T>(implementationType);
             }
 
-            var message = string.Format(TYPE_NOT_FOUND_MESSAGE, targetType.Name);
+            var message = string.Format(TYPE_NOT_FOUND_MESSAGE, implementationType.Name);
             throw new Exception(message);
         }
 
+        ///<inheritdoc cref="IElementContext"/>
         public IEnumerable<T> CreateElements<T>() where T : IElement
         {
             var newElements = new HashSet<T>();
@@ -126,11 +130,13 @@ namespace Elementary
             return element;
         }
 
+        ///<inheritdoc cref="IElementContext"/>
         public T GetRootElement<T>() where T : IRootElement
         {
             return this.rootElementMap.Find<T, IRootElement>();
         }
 
+        ///<inheritdoc cref="IElementContext"/>
         public IEnumerable<T> GetRootElements<T>() where T : IRootElement
         {
             return this.rootElementMap.Values.OfType<T>();
