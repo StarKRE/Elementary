@@ -45,9 +45,9 @@ public sealed class MyApplication : Element, IRootElement
     }
 }
 ```
-- [**[Using]**](https://github.com/StarKRE/Elementary/blob/master/Lib/Attribute/Using.cs) - **MyApplication** class will be used as **element instance** by context
-- [**Element**](https://github.com/StarKRE/Elementary/blob/master/Lib/IElement.cs) - **The base** class of the context
-- [**IRootElement**](https://github.com/StarKRE/Elementary/blob/master/Lib/IRootElement.cs) - A root element in the system. It is created automatically
+- [**[Using]**](https://github.com/StarKRE/Elementary/blob/master/Attribute/Using.cs) - Only classes annotated this attribute can be **instantiated**
+- [**Element**](https://github.com/StarKRE/Elementary/blob/master/Element.cs) - A **base class** of element context.
+- [**IRootElement**](https://github.com/StarKRE/Elementary/blob/master/IRootElement.cs) - **Main elements** of the context that is created automatically.
 
 2. **Play Unity**
 > Console:  **Hello world!**
