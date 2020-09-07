@@ -45,9 +45,10 @@ public sealed class MyApplication : Element, IRootElement
     }
 }
 ```
+- [**IElement**](https://github.com/StarKRE/Elementary/blob/master/IElement.cs) - A **base interface** of element context.
+- [**Element**](https://github.com/StarKRE/Elementary/blob/master/Element.cs) - A **base class** of element context
+- [**IRootElement**](https://github.com/StarKRE/Elementary/blob/master/IRootElement.cs) - **Main elements** of the context that is created automatically
 - [**[Using]**](https://github.com/StarKRE/Elementary/blob/master/Attribute/Using.cs) - Only classes annotated this attribute can be **instantiated**
-- [**Element**](https://github.com/StarKRE/Elementary/blob/master/Element.cs) - A **base class** of element context.
-- [**IRootElement**](https://github.com/StarKRE/Elementary/blob/master/IRootElement.cs) - **Main elements** of the context that is created automatically.
 
 2. **Play Unity**
 > Console:  **Hello world!**
