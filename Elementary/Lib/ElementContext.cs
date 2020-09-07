@@ -32,7 +32,7 @@ namespace Elementary
 
         private Dictionary<Type, IRootElement> rootElementMap;
 
-        /// <inheritdoc cref="IElementContext"/>
+        /// <inheritdoc cref="IElementContext.Initialize"/>
         public void Initialize()
         {
             var elementTables = this.TableBuilder.BuildElementTables();
@@ -67,7 +67,7 @@ namespace Elementary
             }
         }
 
-        /// <inheritdoc cref="IElementContext"/>
+        /// <inheritdoc cref="IElementContext.Terminate"/>
         public void Terminate()
         {
             var rootElements = this.rootElementMap.Values;
@@ -84,7 +84,7 @@ namespace Elementary
             this.rootElementMap.Clear();
         }
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.CreateElement"/>
         public T CreateElement<T>(Type implementationType) where T : IElement
         {
             var parentType = typeof(T);
@@ -104,7 +104,7 @@ namespace Elementary
             throw new Exception(message);
         }
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.CreateElements"/>
         public IEnumerable<T> CreateElements<T>() where T : IElement
         {
             var newElements = new HashSet<T>();
@@ -130,13 +130,13 @@ namespace Elementary
             return element;
         }
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.GetRootElement"/>
         public T GetRootElement<T>() where T : IRootElement
         {
             return this.rootElementMap.Find<T, IRootElement>();
         }
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.GetRootElements"/>
         public IEnumerable<T> GetRootElements<T>() where T : IRootElement
         {
             return this.rootElementMap.Values.OfType<T>();

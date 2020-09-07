@@ -6,7 +6,6 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-		sss|Any CPU = sss|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8484C98C-9B5E-45BD-9905-3C4BB14FA766}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -14,7 +13,5 @@ Global
 		{8484C98C-9B5E-45BD-9905-3C4BB14FA766}.Debug|Any CPU.ActiveCfg = Release|Any CPU
 		{8484C98C-9B5E-45BD-9905-3C4BB14FA766}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{8484C98C-9B5E-45BD-9905-3C4BB14FA766}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{8484C98C-9B5E-45BD-9905-3C4BB14FA766}.sss|Any CPU.ActiveCfg = sss|Any CPU
-		{8484C98C-9B5E-45BD-9905-3C4BB14FA766}.sss|Any CPU.Build.0 = sss|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -5,10 +5,9 @@ using System.Linq;
 namespace Elementary
 {
     /// <summary>
-    ///    <para>Keeps a element group of "T" type.
-    ///     The group consists of unique elements derived from "T".
-    ///     Use this class to create a new architecture layer of your application.
-    ///     </para>
+    ///    <para>Keeps a element group of "T" type.</para>
+    ///    <para>The group consists of unique elements derived from "T".</para>
+    ///    <para>Use this class to create a new architecture layer of your application.</para>
     /// </summary>
     /// <typeparam name="T">Base element type.</typeparam>
     public abstract class ElementLayer<T> : Element where T : IElement
@@ -18,7 +17,9 @@ namespace Elementary
         /// </summary>
         private readonly Dictionary<Type, T> elementMap;
 
-        /// <inheritdoc cref="IElement"/>
+        /// <summary>
+        ///     <para>Any derived element must contains only default constructor.</para>
+        /// </summary>
         protected ElementLayer()
         {
             this.elementMap = new Dictionary<Type, T>();
@@ -27,6 +28,7 @@ namespace Elementary
         /// <summary>
         ///     <para>Returns a unique element from the dictionary.</para>
         /// </summary>
+        /// 
         /// <typeparam name="E">Type of element.</typeparam>
         /// <returns>Element instance of the specified type.</returns>
         protected E GetElement<E>()
@@ -37,6 +39,7 @@ namespace Elementary
         /// <summary>
         ///     <para>Returns a group of unique elements derived from "E".</para>
         /// </summary>
+        /// 
         /// <typeparam name="E">Base type of elements.</typeparam>
         /// <returns>Element instances from the dictionary.</returns>
         protected IEnumerable<E> GetElements<E>()
@@ -44,7 +47,7 @@ namespace Elementary
             return this.elementMap.Values.OfType<E>();
         }
 
-        /// <inheritdoc cref="IElement"/>
+        /// <inheritdoc cref="IElement.OnCreate"/>
         protected sealed override void OnCreate(Element _, IElementContext context)
         {
             var elements = this.CreateElements<T>();
@@ -61,7 +64,7 @@ namespace Elementary
         {
         }
 
-        /// <inheritdoc cref="IElement"/>
+        /// <inheritdoc cref="IElement.OnDispose"/>
         protected sealed override void OnDispose(Element _)
         {
             this.elementMap.Clear();

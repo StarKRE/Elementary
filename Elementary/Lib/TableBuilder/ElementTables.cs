@@ -5,8 +5,8 @@ using System.Text;
 namespace Elementary
 {
     /// <summary>
-    ///     <para>A table wrapper. Keeps two tables: child and parent.
-    ///     They will be used to create instances of elements.</para>
+    ///     <para>A table wrapper. Keeps two tables: child and parent.</para>
+    ///     <para>They will be used to create instances of elements.</para>
     /// </summary>
     public sealed class ElementTables
     {
@@ -29,7 +29,8 @@ namespace Elementary
         /// <summary>
         ///     <para>Use this method to print the tables into console.</para>
         /// </summary>
-        /// <returns></returns>
+        /// 
+        /// <returns>String</returns>
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();

@@ -8,6 +8,7 @@ namespace Elementary
         /// <summary>
         ///     <para>Build two tables: child and parent tables.</para>
         /// </summary>
+        /// 
         /// <returns>A wrap with required tables.</returns>
         ElementTables BuildElementTables();
     }

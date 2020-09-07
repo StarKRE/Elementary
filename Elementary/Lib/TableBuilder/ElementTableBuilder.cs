@@ -24,7 +24,7 @@ namespace Elementary
             "Assembly-CSharp"
         };
 
-        /// <inheritdoc cref="IElementTableBuilder"/>
+        /// <inheritdoc cref="IElementTableBuilder.BuildElementTables"/>
         public ElementTables BuildElementTables()
         {
             var elementTables = new ElementTables();

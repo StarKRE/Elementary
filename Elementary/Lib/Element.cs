@@ -28,7 +28,7 @@ namespace Elementary
 
         #region Lifecycle
 
-        ///<inheritdoc cref="IElement"/>
+        ///<inheritdoc cref="IElement.OnCreate"/>
         public void OnCreate(IElementContext context)
         {
             this.context = context;
@@ -39,7 +39,7 @@ namespace Elementary
         {
         }
 
-        ///<inheritdoc cref="IElement"/>
+        ///<inheritdoc cref="IElement.OnPrepare"/>
         public void OnPrepare()
         {
             foreach (var element in this.createdElements)
@@ -54,7 +54,7 @@ namespace Elementary
         {
         }
 
-        ///<inheritdoc cref="IElement"/>
+        ///<inheritdoc cref="IElement.OnReady"/>
         public void OnReady()
         {
             foreach (var element in this.createdElements)
@@ -69,7 +69,8 @@ namespace Elementary
         {
         }
 
-        ///<inheritdoc cref="IElement"/>
+
+        /// <inheritdoc cref="IElement.OnStart"/>
         public void OnStart()
         {
             foreach (var element in this.createdElements)
@@ -84,7 +85,7 @@ namespace Elementary
         {
         }
 
-        ///<inheritdoc cref="IElement"/>
+        ///<inheritdoc cref="IElement.OnFinish"/>
         public void OnFinish()
         {
             foreach (var element in this.createdElements)
@@ -99,7 +100,7 @@ namespace Elementary
         {
         }
 
-        ///<inheritdoc cref="IElement"/>
+        ///<inheritdoc cref="IElement.OnDispose"/>
         public void OnDispose()
         {
             foreach (var element in this.createdElements)
@@ -117,7 +118,7 @@ namespace Elementary
 
         #endregion
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.CreateElement"/>
         protected T CreateElement<T>(Type implementationType) where T : IElement
         {
             var element = this.context.CreateElement<T>(implementationType);
@@ -125,7 +126,7 @@ namespace Elementary
             return element;
         }
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.CreateElements"/>
         protected IEnumerable<T> CreateElements<T>() where T : IElement
         {
             var elements = this.context.CreateElements<T>();
@@ -137,13 +138,13 @@ namespace Elementary
             return elements;
         }
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.GetRootElement"/>
         protected T GetRootElement<T>() where T : IRootElement
         {
             return this.context.GetRootElement<T>();
         }
 
-        ///<inheritdoc cref="IElementContext"/>
+        ///<inheritdoc cref="IElementContext.GetRootElements"/>
         protected IEnumerable<T> GetRootElements<T>() where T : IRootElement
         {
             return this.context.GetRootElements<T>();

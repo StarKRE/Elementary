@@ -11,6 +11,7 @@ namespace Elementary
         /// <summary>
         ///     Finds a value inherited from "R".
         /// </summary>
+        /// 
         /// <param name="map">Dictionary</param>
         /// <typeparam name="R">Required type.</typeparam>
         /// <typeparam name="T">Dictionary value type.</typeparam>
