@@ -3,6 +3,17 @@
 [![Download](https://img.shields.io/github/downloads/StarKRE/Elementary/v.1.6/total?color=green&label=download%20v.1.6)](https://github.com/StarKRE/Elementary/releases/download/v.1.6/Elementary.unitypackage)
 
 ---
+```csharp
+//Before
+ var controllers = new IController[] { new ControllerA(), new ControllerB(), new ControllerC(), ... };
+ var managers = new IManager[] { new Manager1(), new Manager2()), new Manager3(), ... };
+
+//After
+ var controllers = this.CreateElements<IController>();
+ var managers = this.CreateElements<IManager>();
+```
+
+---
 
 ### How to start with Unity?
 1. [Download](https://github.com/StarKRE/Elementary/releases/download/v.1.6/Elementary.unitypackage) the library
