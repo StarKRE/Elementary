@@ -8,7 +8,7 @@ namespace Elementary
     ///     <para>A table wrapper. Keeps two tables: child and parent.</para>
     ///     <para>They will be used to create instances of elements.</para>
     /// </summary>
-    public sealed class ElementTables
+    public sealed class ElementSheet
     {
         /// <summary>
         ///     <para>Child table. Keeps type vs child types.</para>
@@ -20,7 +20,7 @@ namespace Elementary
         /// </summary>
         public Dictionary<Type, HashSet<Type>> ParentTable { get; }
 
-        public ElementTables()
+        public ElementSheet()
         {
             this.ChildTable = new Dictionary<Type, HashSet<Type>>();
             this.ParentTable = new Dictionary<Type, HashSet<Type>>();
@@ -48,10 +48,10 @@ namespace Elementary
         )
         {
             stringBuilder.AppendLine($"{tableName}: ");
-            foreach (var pair in table)
+            foreach (var (key, value) in table)
             {
-                stringBuilder.Append($"{pair.Key} ->");
-                foreach (var type in pair.Value)
+                stringBuilder.Append($"{key} ->");
+                foreach (var type in value)
                 {
                     stringBuilder.Append($"{type.Name} ");
                 }

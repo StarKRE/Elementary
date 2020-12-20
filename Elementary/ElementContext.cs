@@ -16,11 +16,6 @@ namespace Elementary
         private static readonly Type elementType = typeof(IElement);
 
         /// <summary>
-        ///      <para>Builds two tables below: child and parent tables.</para>
-        /// </summary>
-        protected virtual IElementTableBuilder TableBuilder { get; } = new ElementTableBuilder();
-
-        /// <summary>
         ///     <para>Child table. Keeps type vs child types.</para>
         /// </summary>
         protected Dictionary<Type, HashSet<Type>> ChildTable { get; private set; }
@@ -35,36 +30,11 @@ namespace Elementary
         /// <inheritdoc cref="IElementContext.Initialize"/>
         public void Initialize()
         {
-            var elementTables = this.TableBuilder.BuildElementTables();
-            this.ChildTable = elementTables.ChildTable;
-            this.ParentTable = elementTables.ParentTable;
+            var sheetBuilder = this.ProvideSheetBuilder(); 
+            var parentAndChildTables = sheetBuilder.Build();
+            this.ChildTable = parentAndChildTables.ChildTable;
+            this.ParentTable = parentAndChildTables.ParentTable;
             this.InstantiateElements();
-        }
-
-        private void InstantiateElements()
-        {
-            var rootElements = this.CreateElements<IRootElement>();
-            this.rootElementMap = new Dictionary<Type, IRootElement>();
-            foreach (var rootElement in rootElements)
-            {
-                var type = rootElement.GetType();
-                this.rootElementMap.Add(type, rootElement);
-            }
-
-            foreach (var rootElement in rootElements)
-            {
-                rootElement.OnPrepare();
-            }
-
-            foreach (var rootElement in rootElements)
-            {
-                rootElement.OnReady();
-            }
-
-            foreach (var rootElement in rootElements)
-            {
-                rootElement.OnStart();
-            }
         }
 
         /// <inheritdoc cref="IElementContext.Terminate"/>
@@ -123,13 +93,6 @@ namespace Elementary
             return newElements;
         }
 
-        private T CreateInstance<T>(Type type) where T : IElement
-        {
-            var element = (T) Activator.CreateInstance(type);
-            element.OnCreate(this);
-            return element;
-        }
-
         ///<inheritdoc cref="IElementContext.GetRootElement"/>
         public T GetRootElement<T>() where T : IRootElement
         {
@@ -140,6 +103,55 @@ namespace Elementary
         public IEnumerable<T> GetRootElements<T>() where T : IRootElement
         {
             return this.rootElementMap.Values.OfType<T>();
+        }
+
+        /// <summary>
+        ///      <para>Returns an element type table builder.</para>
+        /// </summary>
+        protected virtual IElementSheetBuilder ProvideSheetBuilder()
+        {
+            return new ElementSheetBuilder();
+        }
+
+        /// <summary>
+        ///     <para>Instantiates a new instance by type.</para>
+        /// </summary>
+        protected virtual T NewInstance<T>(Type specificType)
+        {
+            return (T) Activator.CreateInstance(specificType);
+        }
+
+        private T CreateInstance<T>(Type type) where T : IElement
+        {
+            var element = this.NewInstance<T>(type);
+            element.OnCreate(this);
+            return element;
+        }
+
+        private void InstantiateElements()
+        {
+            var rootElements = this.CreateElements<IRootElement>();
+            this.rootElementMap = new Dictionary<Type, IRootElement>();
+            foreach (var rootElement in rootElements)
+            {
+                var type = rootElement.GetType();
+                this.rootElementMap.Add(type, rootElement);
+            }
+
+            foreach (var rootElement in rootElements)
+            {
+                rootElement.OnPrepare();
+            }
+
+            foreach (var rootElement in rootElements)
+            {
+                rootElement.OnReady();
+            }
+
+            foreach (var rootElement in rootElements)
+            {
+                rootElement.OnStart();
+            }
         }
     }
 }

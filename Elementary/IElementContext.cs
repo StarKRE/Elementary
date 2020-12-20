@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Elementary
 {
     /// <summary>
-    ///     <para>A system that consists of elements.</para>
+    ///     <para>A system that contains elements.</para>
     /// </summary>
     public interface IElementContext
     {
@@ -16,23 +16,23 @@ namespace Elementary
 
         /// <summary>
         ///     <para>Finalizes this system.</para>
-        ///     <para>Use this method to dispose resources from this context.</para>
+        ///     <para>Use this method to destroy elements.</para>
         /// </summary>
         void Terminate();
 
         /// <summary>
-        ///     <para>Instantiates a new instance of element.</para>
+        ///     <para>Create a new element instance.</para>
         ///     <para>Use this method instead the default constructor.</para>
+        ///     <para>Don't use constructors to instantiate an element instance!</para>
         /// </summary>
         /// 
-        /// <typeparam name="T">Abstract type.</typeparam>
-        /// <param name="implementationType">Target type whose instance will be created.</param>
+        /// <typeparam name="T">Interface type. Use polymorphism.
+        /// <param name="implementationType">Specific type.</param>
         /// <returns>A new instance of element.</returns>
         T CreateElement<T>(Type implementationType) where T : IElement;
 
         /// <summary>
-        ///     <para>Instantiates a new "T" element group.</para>
-        ///     <para>The group consists of unique elements derived from "T".</para>
+        ///     <para>Instantiates a new set of unique elements derived from "T".</para>
         /// </summary>
         /// 
         /// <typeparam name="T">Base element type.</typeparam>
@@ -48,7 +48,7 @@ namespace Elementary
         T GetRootElement<T>() where T : IRootElement;
 
         /// <summary>
-        ///     <para>Returns a group of required root elements.</para>
+        ///     <para>Returns a set of root elements derived from "T".</para>
         /// </summary>
         /// 
         /// <typeparam name="T">Base elemeny type.</typeparam>

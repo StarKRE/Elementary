@@ -6,8 +6,8 @@ namespace Elementary
     using ChildTable = Dictionary<Type, HashSet<Type>>;
     using ParentTable = Dictionary<Type, HashSet<Type>>;
 
-    /// <inheritdoc cref="IElementTableBuilder"/>
-    public class ElementTableBuilder : IElementTableBuilder
+    /// <inheritdoc cref="IElementSheetBuilder"/>
+    public class ElementSheetBuilder : IElementSheetBuilder
     {
         private static readonly Type elementType = typeof(IElement);
 
@@ -24,10 +24,10 @@ namespace Elementary
             "Assembly-CSharp"
         };
 
-        /// <inheritdoc cref="IElementTableBuilder.BuildElementTables"/>
-        public ElementTables BuildElementTables()
+        /// <inheritdoc cref="IElementSheetBuilder.Build"/>
+        public ElementSheet Build()
         {
-            var elementTables = new ElementTables();
+            var elementTables = new ElementSheet();
             var currentDomain = AppDomain.CurrentDomain;
             var assemblies = currentDomain.GetAssemblies();
             foreach (var assembly in assemblies)
@@ -49,29 +49,29 @@ namespace Elementary
             return elementTables;
         }
 
-        private void AssemblyType(ElementTables tables, Type targetType)
-        {
-            var childTable = tables.ChildTable;
-            if (childTable.ContainsKey(targetType))
-            {
-                return;
-            }
-
-            if (!this.IsImplementationType(targetType))
-            {
-                return;
-            }
-
-            this.WireInterfaces(targetType, childTable);
-            this.WireBaseTypes(tables, targetType);
-        }
-
-        protected virtual bool IsImplementationType(Type type)
+        protected virtual bool IsSpecificType(Type type)
         {
             return type.IsClass &&
                    !type.IsAbstract &&
                    type.GetCustomAttributes(usingType, true).Length == 1 &&
                    elementType.IsAssignableFrom(type);
+        }
+
+        private void AssemblyType(ElementSheet sheet, Type targetType)
+        {
+            var childTable = sheet.ChildTable;
+            if (childTable.ContainsKey(targetType))
+            {
+                return;
+            }
+
+            if (!this.IsSpecificType(targetType))
+            {
+                return;
+            }
+
+            this.WireInterfaces(targetType, childTable);
+            this.WireBaseTypes(sheet, targetType);
         }
 
         private void WireInterfaces(Type targetType, ChildTable childTable)
@@ -89,10 +89,10 @@ namespace Elementary
             }
         }
 
-        private void WireBaseTypes(ElementTables tables, Type targetType)
+        private void WireBaseTypes(ElementSheet sheet, Type targetType)
         {
-            var parentTable = tables.ParentTable;
-            var childTable = tables.ChildTable;
+            var parentTable = sheet.ParentTable;
+            var childTable = sheet.ChildTable;
             var baseType = targetType.BaseType;
             var targetChildTypes = new HashSet<Type>
             {
@@ -100,7 +100,7 @@ namespace Elementary
             };
             while (!ReferenceEquals(baseType, objectType))
             {
-                if (!childTable.TryGetValue(baseType, out var baseChildTypes))
+                if (!childTable.TryGetValue(baseType!, out var baseChildTypes))
                 {
                     baseChildTypes = new HashSet<Type>();
                     childTable.Add(baseType, baseChildTypes);
@@ -118,7 +118,7 @@ namespace Elementary
                     baseParentTypes.Add(baseType);
                 }
 
-                if (this.IsImplementationType(baseType))
+                if (this.IsSpecificType(baseType))
                 {
                     targetChildTypes.Add(baseType);
                 }

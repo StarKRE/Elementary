@@ -1,16 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Elementary
 {
     /// <summary>
-    ///    <para>Keeps a element group of "T" type.</para>
-    ///    <para>The group consists of unique elements derived from "T".</para>
-    ///    <para>Use this class to create a new architecture layer of your application.</para>
+    ///    <para>An unique element dictionary of "T".</para>
     /// </summary>
+    /// 
     /// <typeparam name="T">Base element type.</typeparam>
-    public abstract class ElementLayer<T> : Element where T : IElement
+    public abstract class ElementLayer<T> : Element, IEnumerable<T> where T : IElement
     {
         /// <summary>
         ///     <para>Dictionary of unique elements derived from "T".</para>
@@ -23,6 +23,20 @@ namespace Elementary
         protected ElementLayer()
         {
             this.elementMap = new Dictionary<Type, T>();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var elements = this.elementMap.Values;
+            foreach (var element in elements)
+            {
+                yield return element;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
         /// <summary>
@@ -67,8 +81,8 @@ namespace Elementary
         /// <inheritdoc cref="IElement.OnDispose"/>
         protected sealed override void OnDispose(Element _)
         {
-            this.elementMap.Clear();
             this.OnDispose(this);
+            this.elementMap.Clear();
         }
 
         protected virtual void OnDispose(ElementLayer<T> _)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_Elementary.-725267706.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Attribute" t="Include">
+        <e p="Using.cs" t="Include" />
+      </e>
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Element.cs" t="Include" />
+      <e p="Elementary.csproj" t="IncludeRecursive" />
+      <e p="Elementary.sln" t="IncludeFlat" />
+      <e p="ElementContext.cs" t="Include" />
+      <e p="ElementLayer.cs" t="Include" />
+      <e p="IElement.cs" t="Include" />
+      <e p="IElementContext.cs" t="Include" />
+      <e p="IRootElement.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp3.1" t="Include">
+            <e p="Elementary.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="README.md" t="Include" />
+      <e p="Sheet" t="Include">
+        <e p="ElementSheet.cs" t="Include" />
+        <e p="ElementSheetBuilder.cs" t="Include" />
+        <e p="IElementSheetBuilder.cs" t="Include" />
+      </e>
+      <e p="Utils" t="Include">
+        <e p="ElementaryUtils.cs" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

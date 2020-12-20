@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Elementary
 {
     /// <summary>
-    ///     <para>A base element class of element context.</para>
+    ///     <para>A base element class.</para>
     /// </summary>
     public abstract class Element : IElement
     {
@@ -14,22 +14,22 @@ namespace Elementary
         private IElementContext context;
 
         /// <summary>
-        ///     <para>Elements those instantiated by this element.</para>
+        ///     <para>Elements instantiated by this element.</para>
         /// </summary>
-        private readonly HashSet<IElement> createdElements;
+        private readonly HashSet<IElement> childElements;
 
         /// <summary>
         ///     <para>Any derived element must contains only default constructor.</para>
         /// </summary>
         protected Element()
         {
-            this.createdElements = new HashSet<IElement>();
+            this.childElements = new HashSet<IElement>();
         }
 
         #region Lifecycle
 
         ///<inheritdoc cref="IElement.OnCreate"/>
-        public void OnCreate(IElementContext context)
+        void IElement.OnCreate(IElementContext context)
         {
             this.context = context;
             this.OnCreate(this, context);
@@ -40,9 +40,9 @@ namespace Elementary
         }
 
         ///<inheritdoc cref="IElement.OnPrepare"/>
-        public void OnPrepare()
+        void IElement.OnPrepare()
         {
-            foreach (var element in this.createdElements)
+            foreach (var element in this.childElements)
             {
                 element.OnPrepare();
             }
@@ -55,9 +55,9 @@ namespace Elementary
         }
 
         ///<inheritdoc cref="IElement.OnReady"/>
-        public void OnReady()
+        void IElement.OnReady()
         {
-            foreach (var element in this.createdElements)
+            foreach (var element in this.childElements)
             {
                 element.OnReady();
             }
@@ -70,9 +70,9 @@ namespace Elementary
         }
 
         /// <inheritdoc cref="IElement.OnStart"/>
-        public void OnStart()
+        void IElement.OnStart()
         {
-            foreach (var element in this.createdElements)
+            foreach (var element in this.childElements)
             {
                 element.OnStart();
             }
@@ -85,9 +85,9 @@ namespace Elementary
         }
 
         ///<inheritdoc cref="IElement.OnFinish"/>
-        public void OnFinish()
+        void IElement.OnFinish()
         {
-            foreach (var element in this.createdElements)
+            foreach (var element in this.childElements)
             {
                 element.OnFinish();
             }
@@ -100,15 +100,15 @@ namespace Elementary
         }
 
         ///<inheritdoc cref="IElement.OnDispose"/>
-        public void OnDispose()
+        void IElement.OnDispose()
         {
-            foreach (var element in this.createdElements)
+            this.OnDispose(this);
+            foreach (var element in this.childElements)
             {
                 element.OnDispose();
             }
 
-            this.createdElements.Clear();
-            this.OnDispose(this);
+            this.childElements.Clear();
         }
 
         protected virtual void OnDispose(Element _)
@@ -120,21 +120,21 @@ namespace Elementary
         ///<inheritdoc cref="IElementContext.CreateElement"/>
         protected T CreateElement<T>(Type implementationType) where T : IElement
         {
-            var element = this.context.CreateElement<T>(implementationType);
-            this.createdElements.Add(element);
-            return element;
+            var newElement = this.context.CreateElement<T>(implementationType);
+            this.childElements.Add(newElement);
+            return newElement;
         }
 
         ///<inheritdoc cref="IElementContext.CreateElements"/>
         protected IEnumerable<T> CreateElements<T>() where T : IElement
         {
-            var elements = this.context.CreateElements<T>();
-            foreach (var element in elements)
+            var newElements = this.context.CreateElements<T>();
+            foreach (var element in newElements)
             {
-                this.createdElements.Add(element);
+                this.childElements.Add(element);
             }
 
-            return elements;
+            return newElements;
         }
 
         ///<inheritdoc cref="IElementContext.GetRootElement"/>
