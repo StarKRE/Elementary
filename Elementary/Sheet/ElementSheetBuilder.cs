@@ -27,7 +27,7 @@ namespace Elementary
         /// <inheritdoc cref="IElementSheetBuilder.Build"/>
         public ElementSheet Build()
         {
-            var elementTables = new ElementSheet();
+            var sheet = new ElementSheet();
             var currentDomain = AppDomain.CurrentDomain;
             var assemblies = currentDomain.GetAssemblies();
             foreach (var assembly in assemblies)
@@ -42,22 +42,23 @@ namespace Elementary
                 var types = assembly.GetTypes();
                 foreach (var type in types)
                 {
-                    this.AssemblyType(elementTables, type);
+                    this.TryRegisterType(sheet, type);
                 }
             }
 
-            return elementTables;
+            return sheet;
         }
 
         protected virtual bool IsSpecificType(Type type)
         {
+            const int one = 1;
             return type.IsClass &&
                    !type.IsAbstract &&
-                   type.GetCustomAttributes(usingType, true).Length == 1 &&
+                   type.GetCustomAttributes(usingType, true).Length == one &&
                    elementType.IsAssignableFrom(type);
         }
 
-        private void AssemblyType(ElementSheet sheet, Type targetType)
+        private void TryRegisterType(ElementSheet sheet, Type targetType)
         {
             var childTable = sheet.ChildTable;
             if (childTable.ContainsKey(targetType))
@@ -70,26 +71,26 @@ namespace Elementary
                 return;
             }
 
-            this.WireInterfaces(targetType, childTable);
-            this.WireBaseTypes(sheet, targetType);
+            this.RegisterInterfaceTypes(targetType, childTable);
+            this.RegisterBaseTypes(sheet, targetType);
         }
 
-        private void WireInterfaces(Type targetType, ChildTable childTable)
+        private void RegisterInterfaceTypes(Type targetType, ChildTable childTable)
         {
-            var interfaces = targetType.GetInterfaces();
-            foreach (var @interface in interfaces)
+            var types = targetType.GetInterfaces();
+            foreach (var type in types)
             {
-                if (!childTable.TryGetValue(@interface, out var childTypes))
+                if (!childTable.TryGetValue(type, out var childTypes))
                 {
                     childTypes = new HashSet<Type>();
-                    childTable.Add(@interface, childTypes);
+                    childTable.Add(type, childTypes);
                 }
 
                 childTypes.Add(targetType);
             }
         }
 
-        private void WireBaseTypes(ElementSheet sheet, Type targetType)
+        private void RegisterBaseTypes(ElementSheet sheet, Type targetType)
         {
             var parentTable = sheet.ParentTable;
             var childTable = sheet.ChildTable;
