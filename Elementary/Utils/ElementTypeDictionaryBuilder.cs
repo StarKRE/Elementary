@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace Elementary
 {
-    using ChildTable = Dictionary<Type, HashSet<Type>>;
-    using ParentTable = Dictionary<Type, HashSet<Type>>;
-
-    /// <inheritdoc cref="IElementSheetBuilder"/>
-    public class ElementSheetBuilder : IElementSheetBuilder
+    /// <summary>
+    ///     <para>Builds an inheritance dictionary: interface vs specific type.</para>
+    /// </summary>
+    public class ElementTypeDictionaryBuilder
     {
         private static readonly Type elementType = typeof(IElement);
 
@@ -24,10 +23,9 @@ namespace Elementary
             "Assembly-CSharp"
         };
 
-        /// <inheritdoc cref="IElementSheetBuilder.Build"/>
-        public ElementSheet Build()
+        public Dictionary<Type, HashSet<Type>> Build()
         {
-            var sheet = new ElementSheet();
+            var inheritanceTable = new Dictionary<Type, HashSet<Type>>();
             var currentDomain = AppDomain.CurrentDomain;
             var assemblies = currentDomain.GetAssemblies();
             foreach (var assembly in assemblies)
@@ -42,11 +40,11 @@ namespace Elementary
                 var types = assembly.GetTypes();
                 foreach (var type in types)
                 {
-                    this.TryRegisterType(sheet, type);
+                    this.TryRegisterType(inheritanceTable, type);
                 }
             }
 
-            return sheet;
+            return inheritanceTable;
         }
 
         protected virtual bool IsSpecificType(Type type)
@@ -58,10 +56,9 @@ namespace Elementary
                    elementType.IsAssignableFrom(type);
         }
 
-        private void TryRegisterType(ElementSheet sheet, Type targetType)
+        private void TryRegisterType(Dictionary<Type, HashSet<Type>> table, Type targetType)
         {
-            var childTable = sheet.ChildTable;
-            if (childTable.ContainsKey(targetType))
+            if (table.ContainsKey(targetType))
             {
                 return;
             }
@@ -71,57 +68,44 @@ namespace Elementary
                 return;
             }
 
-            this.RegisterInterfaceTypes(targetType, childTable);
-            this.RegisterBaseTypes(sheet, targetType);
+            this.AddInterfaceTypes(targetType, table);
+            this.AddBaseTypes(targetType, table);
         }
 
-        private void RegisterInterfaceTypes(Type targetType, ChildTable childTable)
+        private void AddInterfaceTypes(Type targetType, Dictionary<Type, HashSet<Type>> table)
         {
             var types = targetType.GetInterfaces();
             foreach (var type in types)
             {
-                if (!childTable.TryGetValue(type, out var childTypes))
+                if (!table.TryGetValue(type, out var childTypes))
                 {
                     childTypes = new HashSet<Type>();
-                    childTable.Add(type, childTypes);
+                    table.Add(type, childTypes);
                 }
 
                 childTypes.Add(targetType);
             }
         }
 
-        private void RegisterBaseTypes(ElementSheet sheet, Type targetType)
+        private void AddBaseTypes(Type targetType, Dictionary<Type, HashSet<Type>> table)
         {
-            var parentTable = sheet.ParentTable;
-            var childTable = sheet.ChildTable;
             var baseType = targetType.BaseType;
-            var targetChildTypes = new HashSet<Type>
+            var derivedTypes = new HashSet<Type>
             {
                 targetType
             };
             while (!ReferenceEquals(baseType, objectType))
             {
-                if (!childTable.TryGetValue(baseType!, out var baseChildTypes))
+                if (!table.TryGetValue(baseType!, out var baseDerivedTypes))
                 {
-                    baseChildTypes = new HashSet<Type>();
-                    childTable.Add(baseType, baseChildTypes);
+                    baseDerivedTypes = new HashSet<Type>();
+                    table.Add(baseType, baseDerivedTypes);
                 }
 
-                baseChildTypes.UnionWith(targetChildTypes);
-                foreach (var targetChildType in targetChildTypes)
-                {
-                    if (!parentTable.TryGetValue(targetChildType, out var baseParentTypes))
-                    {
-                        baseParentTypes = new HashSet<Type>();
-                        parentTable.Add(targetChildType, baseParentTypes);
-                    }
-
-                    baseParentTypes.Add(baseType);
-                }
-
+                baseDerivedTypes.UnionWith(derivedTypes);
                 if (this.IsSpecificType(baseType))
                 {
-                    targetChildTypes.Add(baseType);
+                    derivedTypes.Add(baseType);
                 }
 
                 baseType = baseType.BaseType;

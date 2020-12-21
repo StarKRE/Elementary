@@ -16,24 +16,16 @@ namespace Elementary
         private static readonly Type elementType = typeof(IElement);
 
         /// <summary>
-        ///     <para>Child table. Keeps type vs child types.</para>
+        ///     <para>Keeps interface type vs specific types.</para>
         /// </summary>
-        protected Dictionary<Type, HashSet<Type>> ChildTable { get; private set; }
-
-        /// <summary>
-        ///     <para>Parent table. Keeps type vs parent types.</para>
-        /// </summary>
-        protected Dictionary<Type, HashSet<Type>> ParentTable { get; private set; }
+        protected Dictionary<Type, HashSet<Type>> InheritanceTable { get; private set; }
 
         private Dictionary<Type, IRootElement> rootElementMap;
 
         /// <inheritdoc cref="IElementContext.Initialize"/>
         public void Initialize()
         {
-            var sheetBuilder = this.ProvideSheetBuilder(); 
-            var parentAndChildTables = sheetBuilder.Build();
-            this.ChildTable = parentAndChildTables.ChildTable;
-            this.ParentTable = parentAndChildTables.ParentTable;
+            this.InheritanceTable = this.ProvideInheritanceTable();
             this.InstantiateElements();
         }
 
@@ -57,14 +49,14 @@ namespace Elementary
         ///<inheritdoc cref="IElementContext.CreateElement"/>
         public T CreateElement<T>(Type implementationType) where T : IElement
         {
-            var parentType = typeof(T);
-            if (this.ChildTable.TryGetValue(parentType, out var childTypes) &&
-                childTypes.Contains(implementationType))
+            var baseType = typeof(T);
+            if (this.InheritanceTable.TryGetValue(baseType, out var derivedTypes) &&
+                derivedTypes.Contains(implementationType))
             {
                 return this.CreateInstance<T>(implementationType);
             }
 
-            if (this.ChildTable.TryGetValue(elementType, out var elementTypes) &&
+            if (this.InheritanceTable.TryGetValue(elementType, out var elementTypes) &&
                 elementTypes.Contains(implementationType))
             {
                 return this.CreateInstance<T>(implementationType);
@@ -79,14 +71,14 @@ namespace Elementary
         {
             var newElements = new HashSet<T>();
             var parentType = typeof(T);
-            if (!this.ChildTable.TryGetValue(parentType, out var childTypes))
+            if (!this.InheritanceTable.TryGetValue(parentType, out var derivedTypes))
             {
                 return newElements;
             }
 
-            foreach (var childType in childTypes)
+            foreach (var type in derivedTypes)
             {
-                var newElement = this.CreateInstance<T>(childType);
+                var newElement = this.CreateInstance<T>(type);
                 newElements.Add(newElement);
             }
 
@@ -106,11 +98,13 @@ namespace Elementary
         }
 
         /// <summary>
-        ///      <para>Returns an element type table builder.</para>
+        ///      <para>Returns an dictionary: interface vs specific types.</para>
         /// </summary>
-        protected virtual IElementSheetBuilder ProvideSheetBuilder()
+        protected virtual Dictionary<Type, HashSet<Type>> ProvideInheritanceTable()
         {
-            return new ElementSheetBuilder();
+            var inheritanceTableBuilder = new ElementTypeDictionaryBuilder();
+            var derivedTypeDictionary = inheritanceTableBuilder.Build();
+            return derivedTypeDictionary;
         }
 
         /// <summary>

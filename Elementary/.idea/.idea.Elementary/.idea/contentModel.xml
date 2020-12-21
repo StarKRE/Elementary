@@ -27,13 +27,9 @@
       </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="README.md" t="Include" />
-      <e p="Sheet" t="Include">
-        <e p="ElementSheet.cs" t="Include" />
-        <e p="ElementSheetBuilder.cs" t="Include" />
-        <e p="IElementSheetBuilder.cs" t="Include" />
-      </e>
       <e p="Utils" t="Include">
         <e p="ElementaryUtils.cs" t="Include" />
+        <e p="ElementTypeDictionaryBuilder.cs" t="Include" />
       </e>
     </e>
   </component>
