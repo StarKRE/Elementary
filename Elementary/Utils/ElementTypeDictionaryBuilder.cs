@@ -99,9 +99,9 @@ namespace Elementary
             {
                 type
             };
-            while (!ReferenceEquals(baseType, objectType))
+            while (!ReferenceEquals(baseType, null) && !ReferenceEquals(baseType, objectType))
             {
-                if (!table.TryGetValue(baseType!, out var baseDerivedTypes))
+                if (!table.TryGetValue(baseType, out var baseDerivedTypes))
                 {
                     baseDerivedTypes = new HashSet<Type>();
                     table.Add(baseType, baseDerivedTypes);

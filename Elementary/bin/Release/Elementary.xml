@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Elementary</name>
+    </assembly>
+    <members>
+        <member name="T:Elementary.Using">
+            <summary>
+                <para>Classes derived from <see cref="T:Elementary.IElement"/> and
+                annotated this attribute can be instantiated.</para>
+            </summary>
+        </member>
+        <member name="T:Elementary.Element">
+            <summary>
+                <para>A base element class.</para>
+            </summary>
+        </member>
+        <member name="F:Elementary.Element.context">
+            <summary>
+                <para>A parent context where this element is located.</para>
+            </summary>
+        </member>
+        <member name="F:Elementary.Element.childElements">
+            <summary>
+                <para>Elements instantiated by this element.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.Element.#ctor">
+            <summary>
+                <para>Any derived element must contains only default constructor.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.Element.Elementary#IElement#OnCreate(Elementary.IElementContext)">
+            <inheritdoc cref="M:Elementary.IElement.OnCreate(Elementary.IElementContext)"/>
+        </member>
+        <member name="M:Elementary.Element.Elementary#IElement#OnPrepare">
+            <inheritdoc cref="M:Elementary.IElement.OnPrepare"/>
+        </member>
+        <member name="M:Elementary.Element.Elementary#IElement#OnReady">
+            <inheritdoc cref="M:Elementary.IElement.OnReady"/>
+        </member>
+        <member name="M:Elementary.Element.Elementary#IElement#OnStart">
+            <inheritdoc cref="M:Elementary.IElement.OnStart"/>
+        </member>
+        <member name="M:Elementary.Element.Elementary#IElement#OnFinish">
+            <inheritdoc cref="M:Elementary.IElement.OnFinish"/>
+        </member>
+        <member name="M:Elementary.Element.Elementary#IElement#OnDispose">
+            <inheritdoc cref="M:Elementary.IElement.OnDispose"/>
+        </member>
+        <member name="M:Elementary.Element.CreateElement``1(System.Type)">
+            <inheritdoc cref="M:Elementary.IElementContext.CreateElement``1(System.Type)"/>
+        </member>
+        <member name="M:Elementary.Element.CreateElements``1">
+            <inheritdoc cref="M:Elementary.IElementContext.CreateElements``1"/>
+        </member>
+        <member name="M:Elementary.Element.GetRootElement``1">
+            <inheritdoc cref="M:Elementary.IElementContext.GetRootElement``1"/>
+        </member>
+        <member name="M:Elementary.Element.GetRootElements``1">
+            <inheritdoc cref="M:Elementary.IElementContext.GetRootElements``1"/>
+        </member>
+        <member name="T:Elementary.ElementContext">
+            <summary>
+                <para>A base element context.</para>
+            </summary>
+        </member>
+        <member name="P:Elementary.ElementContext.InheritanceTable">
+            <summary>
+                <para>Keeps interface type vs specific types.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.ElementContext.Initialize">
+            <inheritdoc cref="M:Elementary.IElementContext.Initialize"/>
+        </member>
+        <member name="M:Elementary.ElementContext.Terminate">
+            <inheritdoc cref="M:Elementary.IElementContext.Terminate"/>
+        </member>
+        <member name="M:Elementary.ElementContext.CreateElement``1(System.Type)">
+            <inheritdoc cref="M:Elementary.IElementContext.CreateElement``1(System.Type)"/>
+        </member>
+        <member name="M:Elementary.ElementContext.CreateElements``1">
+            <inheritdoc cref="M:Elementary.IElementContext.CreateElements``1"/>
+        </member>
+        <member name="M:Elementary.ElementContext.GetRootElement``1">
+            <inheritdoc cref="M:Elementary.IElementContext.GetRootElement``1"/>
+        </member>
+        <member name="M:Elementary.ElementContext.GetRootElements``1">
+            <inheritdoc cref="M:Elementary.IElementContext.GetRootElements``1"/>
+        </member>
+        <member name="M:Elementary.ElementContext.ProvideInheritanceTable">
+            <summary>
+                 <para>Returns an dictionary: interface vs specific types.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.ElementContext.NewInstance``1(System.Type)">
+            <summary>
+                <para>Instantiates a new instance by type.</para>
+            </summary>
+        </member>
+        <member name="T:Elementary.ElementLayer`1">
+            <summary>
+               <para>An unique element dictionary of "T".</para>
+            </summary>
+            
+            <typeparam name="T">Base element type.</typeparam>
+        </member>
+        <member name="F:Elementary.ElementLayer`1.elementMap">
+            <summary>
+                <para>Dictionary of unique elements derived from "T".</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.ElementLayer`1.#ctor">
+            <summary>
+                <para>Any derived element must contains only default constructor.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.ElementLayer`1.GetElement``1">
+            <summary>
+                <para>Returns a unique element from the dictionary.</para>
+            </summary>
+            
+            <typeparam name="E">Type of element.</typeparam>
+            <returns>Element instance of the specified type.</returns>
+        </member>
+        <member name="M:Elementary.ElementLayer`1.GetElements``1">
+            <summary>
+                <para>Returns a group of unique elements derived from "E".</para>
+            </summary>
+            
+            <typeparam name="E">Base type of elements.</typeparam>
+            <returns>Element instances from the dictionary.</returns>
+        </member>
+        <member name="M:Elementary.ElementLayer`1.OnCreate(Elementary.Element,Elementary.IElementContext)">
+            <inheritdoc cref="M:Elementary.IElement.OnCreate(Elementary.IElementContext)"/>
+        </member>
+        <member name="M:Elementary.ElementLayer`1.OnDispose(Elementary.Element)">
+            <inheritdoc cref="M:Elementary.IElement.OnDispose"/>
+        </member>
+        <member name="T:Elementary.IElement">
+            <summary>
+                <para>A base contract of element.</para>.
+            </summary>
+        </member>
+        <member name="M:Elementary.IElement.OnCreate(Elementary.IElementContext)">
+            <summary>
+                <para>Called after constructor.</para>
+                <para>Use this method to instantiate child elements.</para>
+            </summary>
+            <param name="context">A parent context that contains this element.</param>
+        </member>
+        <member name="M:Elementary.IElement.OnPrepare">
+            <summary>
+                <para>Called when all elements have created.</para>
+                <para>Use this method to get other element references.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.IElement.OnReady">
+            <summary>
+                <para>Called when all elements have prepared.</para>
+                <para>Use this method to subscribe on other elements.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.IElement.OnStart">
+            <summary>
+                <para>Called when all elements have ready.</para>
+                <para>Use this method to setup initial state.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.IElement.OnFinish">
+            <summary>
+                <para>Called before parent context is terminating.</para>
+                <para>Use this method to unsubscribe from other elements.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.IElement.OnDispose">
+            <summary>
+                <para>Called when parent context is terminating.</para>
+                <para>Use this method to dispose resources.</para>
+            </summary>
+        </member>
+        <member name="T:Elementary.IElementContext">
+            <summary>
+                <para>A system that contains elements.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.IElementContext.Initialize">
+            <summary>
+                <para>Initializes this system.</para>
+                <para>Use this method to instantiate elements.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.IElementContext.Terminate">
+            <summary>
+                <para>Finalizes this system.</para>
+                <para>Use this method to destroy elements.</para>
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Elementary.IElementContext.CreateElement``1(System.Type)" -->
+        <member name="M:Elementary.IElementContext.CreateElements``1">
+            <summary>
+                <para>Instantiates a new set of unique elements derived from "T".</para>
+            </summary>
+            
+            <typeparam name="T">Base element type.</typeparam>
+            <returns>Unique element instances inherited from "T".</returns>
+        </member>
+        <member name="M:Elementary.IElementContext.GetRootElement``1">
+            <summary>
+                <para>Returns a root element of this context.</para>
+            </summary>
+            
+            <typeparam name="T">The root element type.</typeparam>
+            <returns>Instance.</returns>
+        </member>
+        <member name="M:Elementary.IElementContext.GetRootElements``1">
+            <summary>
+                <para>Returns a set of root elements derived from "T".</para>
+            </summary>
+            
+            <typeparam name="T">Base elemeny type.</typeparam>
+            <returns>A group of root elements inherited from "T".</returns>
+        </member>
+        <member name="T:Elementary.IRootElement">
+            <summary>
+                <para>Root singleton element.</para>
+                <para>This element will created automatically by the context.</para>
+            </summary>
+        </member>
+        <member name="T:Elementary.ElementaryUtils">
+            <summary>
+                <para>Utils for this library.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.ElementaryUtils.Find``2(System.Collections.Generic.Dictionary{System.Type,``1})">
+            <summary>
+                Finds a value inherited from "R".
+            </summary>
+            
+            <param name="map">Dictionary</param>
+            <typeparam name="R">Required type.</typeparam>
+            <typeparam name="T">Dictionary value type.</typeparam>
+            <returns>Required value.</returns>
+        </member>
+        <member name="T:Elementary.ElementTypeDictionaryBuilder">
+            <summary>
+                <para>Builds an inheritance dictionary: interface vs specific type.</para>
+            </summary>
+        </member>
+        <member name="P:Elementary.ElementTypeDictionaryBuilder.RequiredAssemblies">
+            <summary>
+                <para>Assembly scope of element types.</para>
+            </summary>
+        </member>
+        <member name="M:Elementary.ElementTypeDictionaryBuilder.MatchesType(System.Type)">
+            <summary>
+                <para>Checks type to add it into inheritance dictionary.</para>
+            </summary>
+            <param name="type">Possible element type.</param>
+        </member>
+    </members>
+</doc>

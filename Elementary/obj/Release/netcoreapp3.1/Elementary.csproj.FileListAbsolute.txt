@@ -1,0 +1,10 @@
+/Users/igor_gulkin/Projects/Elementary/Elementary/bin/Release/netcoreapp3.1/Elementary.deps.json
+/Users/igor_gulkin/Projects/Elementary/Elementary/bin/Release/netcoreapp3.1/Elementary.dll
+/Users/igor_gulkin/Projects/Elementary/Elementary/bin/Release/netcoreapp3.1/Elementary.pdb
+/Users/igor_gulkin/Projects/Elementary/Elementary/obj/Release/netcoreapp3.1/Elementary.csprojAssemblyReference.cache
+/Users/igor_gulkin/Projects/Elementary/Elementary/obj/Release/netcoreapp3.1/Elementary.AssemblyInfoInputs.cache
+/Users/igor_gulkin/Projects/Elementary/Elementary/obj/Release/netcoreapp3.1/Elementary.AssemblyInfo.cs
+/Users/igor_gulkin/Projects/Elementary/Elementary/obj/Release/netcoreapp3.1/Elementary.csproj.CoreCompileInputs.cache
+/Users/igor_gulkin/Projects/Elementary/Elementary/obj/Release/netcoreapp3.1/Elementary.dll
+/Users/igor_gulkin/Projects/Elementary/Elementary/obj/Release/netcoreapp3.1/Elementary.pdb
+/Users/igor_gulkin/Projects/Elementary/Elementary/bin/Release/netcoreapp3.1/Elementary.xml

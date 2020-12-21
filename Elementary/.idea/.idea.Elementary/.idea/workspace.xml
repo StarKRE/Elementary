@@ -19,9 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f132e153-8842-4fa7-aab1-2ee75f75fd36" name="Default Changelist" comment="Fixed lib">
+    <list default="true" id="f132e153-8842-4fa7-aab1-2ee75f75fd36" name="Default Changelist" comment="Fixed doc">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Elementary/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Elementary/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Elementary/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Elementary/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Attribute/Using.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Attribute/Using.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elementary.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Elementary.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elementary.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Elementary.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utils/ElementTypeDictionaryBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/ElementTypeDictionaryBuilder.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +51,6 @@
         <option value="$PROJECT_DIR$/SheetBulder/ElementSheet.cs" />
         <option value="$PROJECT_DIR$/Sheet/IElementSheetBuilder.cs" />
         <option value="$PROJECT_DIR$/IElement.cs" />
-        <option value="$PROJECT_DIR$/IRootElement.cs" />
         <option value="$PROJECT_DIR$/Element.cs" />
         <option value="$PROJECT_DIR$/Sheet/ElementSheet.cs" />
         <option value="$PROJECT_DIR$/Utils/ElementaryUtils.cs" />
@@ -63,6 +64,8 @@
         <option value="$PROJECT_DIR$/Utils/TypeDictionaryBuilder.cs" />
         <option value="$PROJECT_DIR$/ElementContext.cs" />
         <option value="$PROJECT_DIR$/Attribute/Using.cs" />
+        <option value="$PROJECT_DIR$/IRootElement.cs" />
+        <option value="$PROJECT_DIR$/Elementary.csproj" />
         <option value="$PROJECT_DIR$/Utils/ElementTypeDictionaryBuilder.cs" />
       </list>
     </option>
@@ -91,7 +94,7 @@
       <updated>1608494578523</updated>
       <workItem from="1608494584633" duration="4390000" />
       <workItem from="1608515364074" duration="1849000" />
-      <workItem from="1608579287675" duration="747000" />
+      <workItem from="1608579287675" duration="2322000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed doc">
       <created>1608498464184</created>
@@ -128,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608517174029</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed doc">
+      <created>1608583362549</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1608583362549</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,23 +160,27 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Fixed doc" />
     <MESSAGE value="Fixed lib" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed lib" />
+    <MESSAGE value="Fixed doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed doc" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608583481753">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1608583481753" />
     <state x="532" y="158" key="RiderGenerateDialog" timestamp="1608497921510">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="532" y="158" key="RiderGenerateDialog/0.0.1440.900@0.0.1440.900" timestamp="1608497921510" />
-    <state width="498" height="445" key="SwitcherDM" timestamp="1608516494733">
+    <state width="498" height="445" key="SwitcherDM" timestamp="1608584403522">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="498" height="445" key="SwitcherDM/0.0.1440.900@0.0.1440.900" timestamp="1608516494733" />
-    <state x="320" y="177" key="Vcs.Push.Dialog.v2" timestamp="1608517175184">
+    <state width="498" height="445" key="SwitcherDM/0.0.1440.900@0.0.1440.900" timestamp="1608584403522" />
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2" timestamp="1608583365164">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1608517175184" />
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1608583365164" />
     <state x="384" y="209" key="run.anything.popup" timestamp="1608496060696">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
