@@ -1,11 +1,11 @@
 # Elementary
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Download](https://img.shields.io/github/downloads/StarKRE/Elementary/v.1.6/total?color=green&label=download%20v.1.6)](https://github.com/StarKRE/Elementary/releases/download/v.1.6/Elementary.unitypackage)
+[![Download](https://img.shields.io/github/downloads/StarKRE/Elementary/v.1.6/total?color=green&label=download%20v.1.7)](https://github.com/StarKRE/Elementary/releases/download/v.1.7/Elementary.unitypackage)
 
 ---
 
 ### How to start with Unity?
-1. [Download](https://github.com/StarKRE/Elementary/releases/download/v.1.6/Elementary.unitypackage) the library
+1. [Download](https://github.com/StarKRE/Elementary/releases/download/v.1.7/Elementary.unitypackage) the library
 2. Import Elementary.unitypackage
 3. Create a **GameObject** on scene and add **MainScript.cs**
 
