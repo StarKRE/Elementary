@@ -16,7 +16,7 @@ namespace Elementary
         private static readonly Type objectType = typeof(object);
 
         /// <summary>
-        ///     <para>Finds available element types only in the selected assemblies.</para>
+        ///     <para>Assembly scope of element types.</para>
         /// </summary>
         protected virtual HashSet<string> RequiredAssemblies { get; } = new HashSet<string>
         {
@@ -48,7 +48,11 @@ namespace Elementary
             return inheritanceTable;
         }
 
-        protected virtual bool IsSpecificType(Type type)
+        /// <summary>
+        ///     <para>Checks type to add it into inheritance dictionary.</para>
+        /// </summary>
+        /// <param name="type">Possible element type.</param>
+        protected virtual bool MatchesType(Type type)
         {
             const int one = 1;
             return type.IsClass &&
@@ -64,7 +68,7 @@ namespace Elementary
                 return;
             }
 
-            if (!this.IsSpecificType(type))
+            if (!this.MatchesType(type))
             {
                 return;
             }
@@ -104,7 +108,7 @@ namespace Elementary
                 }
 
                 baseDerivedTypes.UnionWith(derivedTypes);
-                if (this.IsSpecificType(baseType))
+                if (this.MatchesType(baseType))
                 {
                     derivedTypes.Add(baseType);
                 }

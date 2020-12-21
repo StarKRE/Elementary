@@ -1,7 +1,8 @@
 namespace Elementary
 {
     /// <summary>
-    ///     <para>Main singleton elements of the context that is created automatically.</para>
+    ///     <para>Root singleton element.</para>
+    ///     <para>This element will created automatically by the context.</para>
     /// </summary>
     public interface IRootElement : IElement
     {

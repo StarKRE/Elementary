@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f132e153-8842-4fa7-aab1-2ee75f75fd36" name="Default Changelist" comment="Fixed lib">
-      <change beforePath="$PROJECT_DIR$/ElementContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ElementContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Elementary/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Elementary/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attribute/Using.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Attribute/Using.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utils/ElementTypeDictionaryBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/ElementTypeDictionaryBuilder.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +48,6 @@
         <option value="$PROJECT_DIR$/TableBuilder/ElementTableBuilder.cs" />
         <option value="$PROJECT_DIR$/SheetBulder/ElementSheet.cs" />
         <option value="$PROJECT_DIR$/Sheet/IElementSheetBuilder.cs" />
-        <option value="$PROJECT_DIR$/Attribute/Using.cs" />
         <option value="$PROJECT_DIR$/IElement.cs" />
         <option value="$PROJECT_DIR$/IRootElement.cs" />
         <option value="$PROJECT_DIR$/Element.cs" />
@@ -61,8 +61,9 @@
         <option value="$PROJECT_DIR$/Utils/InheritanceTableBuilder.cs" />
         <option value="$PROJECT_DIR$/Utils/ElementaryTableBuilder.cs" />
         <option value="$PROJECT_DIR$/Utils/TypeDictionaryBuilder.cs" />
-        <option value="$PROJECT_DIR$/Utils/ElementTypeDictionaryBuilder.cs" />
         <option value="$PROJECT_DIR$/ElementContext.cs" />
+        <option value="$PROJECT_DIR$/Attribute/Using.cs" />
+        <option value="$PROJECT_DIR$/Utils/ElementTypeDictionaryBuilder.cs" />
       </list>
     </option>
   </component>
@@ -89,7 +90,8 @@
       <option name="presentableId" value="Default" />
       <updated>1608494578523</updated>
       <workItem from="1608494584633" duration="4390000" />
-      <workItem from="1608515364074" duration="1803000" />
+      <workItem from="1608515364074" duration="1849000" />
+      <workItem from="1608579287675" duration="747000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed doc">
       <created>1608498464184</created>
@@ -119,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608516997884</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed lib">
+      <created>1608517174029</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1608517174029</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,10 +163,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="498" height="445" key="SwitcherDM/0.0.1440.900@0.0.1440.900" timestamp="1608516494733" />
-    <state x="320" y="177" key="Vcs.Push.Dialog.v2" timestamp="1608516999004">
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2" timestamp="1608517175184">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1608516999004" />
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1608517175184" />
     <state x="384" y="209" key="run.anything.popup" timestamp="1608496060696">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
