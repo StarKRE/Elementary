@@ -56,43 +56,43 @@ namespace Elementary
                    elementType.IsAssignableFrom(type);
         }
 
-        private void TryRegisterType(Dictionary<Type, HashSet<Type>> table, Type targetType)
+        private void TryRegisterType(Dictionary<Type, HashSet<Type>> table, Type type)
         {
-            if (table.ContainsKey(targetType))
+            if (table.ContainsKey(type))
             {
                 return;
             }
 
-            if (!this.IsSpecificType(targetType))
+            if (!this.IsSpecificType(type))
             {
                 return;
             }
 
-            this.AddInterfaceTypes(targetType, table);
-            this.AddBaseTypes(targetType, table);
+            this.AddInterfaceTypes(type, table);
+            this.AddBaseTypes(type, table);
         }
 
-        private void AddInterfaceTypes(Type targetType, Dictionary<Type, HashSet<Type>> table)
+        private void AddInterfaceTypes(Type type, Dictionary<Type, HashSet<Type>> table)
         {
-            var types = targetType.GetInterfaces();
-            foreach (var type in types)
+            var interfaceTypes = type.GetInterfaces();
+            foreach (var interfaceType in interfaceTypes)
             {
-                if (!table.TryGetValue(type, out var childTypes))
+                if (!table.TryGetValue(interfaceType, out var derivedTypes))
                 {
-                    childTypes = new HashSet<Type>();
-                    table.Add(type, childTypes);
+                    derivedTypes = new HashSet<Type>();
+                    table.Add(interfaceType, derivedTypes);
                 }
 
-                childTypes.Add(targetType);
+                derivedTypes.Add(type);
             }
         }
 
-        private void AddBaseTypes(Type targetType, Dictionary<Type, HashSet<Type>> table)
+        private void AddBaseTypes(Type type, Dictionary<Type, HashSet<Type>> table)
         {
-            var baseType = targetType.BaseType;
+            var baseType = type.BaseType;
             var derivedTypes = new HashSet<Type>
             {
-                targetType
+                type
             };
             while (!ReferenceEquals(baseType, objectType))
             {
