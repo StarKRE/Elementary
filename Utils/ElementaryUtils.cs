@@ -37,7 +37,7 @@ namespace Elementary
                 }
             }
 
-            throw new Exception("Value not found!");
+            throw new Exception("Item is not found!");
         }
     }
 }
