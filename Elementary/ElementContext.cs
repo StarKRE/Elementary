@@ -102,8 +102,8 @@ namespace Elementary
         /// </summary>
         protected virtual Dictionary<Type, HashSet<Type>> ProvideInheritanceTable()
         {
-            var inheritanceTableBuilder = new ElementTypeDictionaryBuilder();
-            var derivedTypeDictionary = inheritanceTableBuilder.Build();
+            var tableBuilder = new ElementTypeDictionaryBuilder();
+            var derivedTypeDictionary = tableBuilder.Build();
             return derivedTypeDictionary;
         }
 
