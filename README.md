@@ -5,7 +5,7 @@
 ---
 
 ### How to start with Unity?
-1. [Download](https://github.com/StarKRE/Elementary/releases/download/v.01.2021/Elementary.unitypackage) the unity package
+1. [Download](https://github.com/StarKRE/Elementary/releases/download/v.01.2021/Elementary.unitypackage) the unitypackage
 2. Import Elementary.unitypackage
 3. Create a **GameObject** on scene and add **MainScript.cs**
 
