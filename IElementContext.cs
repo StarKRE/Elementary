@@ -26,7 +26,6 @@ namespace Elementary
         ///     <para>Don't use constructors to instantiate an element instance!</para>
         /// </summary>
         /// 
-        /// <typeparam name="T">Interface type. Use polymorphism.
         /// <param name="implementationType">Specific type.</param>
         /// <returns>A new instance of element.</returns>
         T CreateElement<T>(Type implementationType) where T : IElement;

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +9,7 @@ namespace Elementary
     /// </summary>
     /// 
     /// <typeparam name="T">Base element type.</typeparam>
-    public abstract class ElementLayer<T> : Element, IEnumerable<T> where T : IElement
+    public abstract class ElementLayer<T> : Element where T : IElement
     {
         /// <summary>
         ///     <para>Dictionary of unique elements derived from "T".</para>
@@ -23,20 +22,6 @@ namespace Elementary
         protected ElementLayer()
         {
             this.elementMap = new Dictionary<Type, T>();
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            var elements = this.elementMap.Values;
-            foreach (var element in elements)
-            {
-                yield return element;
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
         }
 
         /// <summary>
@@ -62,7 +47,7 @@ namespace Elementary
         }
 
         /// <inheritdoc cref="IElement.OnCreate"/>
-        protected sealed override void OnCreate(Element _, IElementContext context)
+        protected override void OnCreate()
         {
             var elements = this.CreateElements<T>();
             foreach (var element in elements)
@@ -70,23 +55,12 @@ namespace Elementary
                 var type = element.GetType();
                 this.elementMap.Add(type, element);
             }
-
-            this.OnCreate(this, context);
-        }
-
-        protected virtual void OnCreate(ElementLayer<T> _, IElementContext context)
-        {
         }
 
         /// <inheritdoc cref="IElement.OnDispose"/>
-        protected sealed override void OnDispose(Element _)
+        protected override void OnDispose()
         {
-            this.OnDispose(this);
             this.elementMap.Clear();
-        }
-
-        protected virtual void OnDispose(ElementLayer<T> _)
-        {
         }
     }
 }

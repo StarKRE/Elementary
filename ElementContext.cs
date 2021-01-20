@@ -50,14 +50,14 @@ namespace Elementary
         public T CreateElement<T>(Type implementationType) where T : IElement
         {
             var baseType = typeof(T);
-            if (this.InheritanceTable.TryGetValue(baseType, out var derivedTypes) &&
-                derivedTypes.Contains(implementationType))
+            if (this.InheritanceTable.ContainsKey(baseType) &&
+                this.InheritanceTable[baseType].Contains(implementationType))
             {
                 return this.CreateInstance<T>(implementationType);
             }
 
-            if (this.InheritanceTable.TryGetValue(elementType, out var elementTypes) &&
-                elementTypes.Contains(implementationType))
+            if (this.InheritanceTable.ContainsKey(elementType) &&
+                this.InheritanceTable[elementType].Contains(implementationType))
             {
                 return this.CreateInstance<T>(implementationType);
             }
@@ -70,12 +70,13 @@ namespace Elementary
         public IEnumerable<T> CreateElements<T>() where T : IElement
         {
             var newElements = new HashSet<T>();
-            var parentType = typeof(T);
-            if (!this.InheritanceTable.TryGetValue(parentType, out var derivedTypes))
+            var baseType = typeof(T);
+            if (!this.InheritanceTable.ContainsKey(baseType))
             {
                 return newElements;
             }
 
+            var derivedTypes = this.InheritanceTable[baseType];
             foreach (var type in derivedTypes)
             {
                 var newElement = this.CreateInstance<T>(type);

@@ -28,18 +28,17 @@ namespace Elementary
 
         #region Lifecycle
 
-        ///<inheritdoc cref="IElement.OnCreate"/>
         void IElement.OnCreate(IElementContext context)
         {
             this.context = context;
-            this.OnCreate(this, context);
+            this.OnCreate();
         }
 
-        protected virtual void OnCreate(Element _, IElementContext context)
+        ///<inheritdoc cref="IElement.OnCreate"/>
+        protected virtual void OnCreate()
         {
         }
 
-        ///<inheritdoc cref="IElement.OnPrepare"/>
         void IElement.OnPrepare()
         {
             foreach (var element in this.childElements)
@@ -47,14 +46,14 @@ namespace Elementary
                 element.OnPrepare();
             }
 
-            this.OnPrepare(this);
+            this.OnPrepare();
         }
 
-        protected virtual void OnPrepare(Element _)
+        ///<inheritdoc cref="IElement.OnPrepare"/>
+        protected virtual void OnPrepare()
         {
         }
 
-        ///<inheritdoc cref="IElement.OnReady"/>
         void IElement.OnReady()
         {
             foreach (var element in this.childElements)
@@ -62,14 +61,14 @@ namespace Elementary
                 element.OnReady();
             }
 
-            this.OnReady(this);
+            this.OnReady();
         }
 
-        protected virtual void OnReady(Element _)
+        ///<inheritdoc cref="IElement.OnReady"/>
+        protected virtual void OnReady()
         {
         }
 
-        /// <inheritdoc cref="IElement.OnStart"/>
         void IElement.OnStart()
         {
             foreach (var element in this.childElements)
@@ -77,14 +76,14 @@ namespace Elementary
                 element.OnStart();
             }
 
-            this.OnStart(this);
+            this.OnStart();
         }
 
-        protected virtual void OnStart(Element _)
+        /// <inheritdoc cref="IElement.OnStart"/>
+        protected virtual void OnStart()
         {
         }
 
-        ///<inheritdoc cref="IElement.OnFinish"/>
         void IElement.OnFinish()
         {
             foreach (var element in this.childElements)
@@ -92,17 +91,17 @@ namespace Elementary
                 element.OnFinish();
             }
 
-            this.OnFinish(this);
+            this.OnFinish();
         }
 
-        protected virtual void OnFinish(Element _)
+        ///<inheritdoc cref="IElement.OnFinish"/>
+        protected virtual void OnFinish()
         {
         }
 
-        ///<inheritdoc cref="IElement.OnDispose"/>
         void IElement.OnDispose()
         {
-            this.OnDispose(this);
+            this.OnDispose();
             foreach (var element in this.childElements)
             {
                 element.OnDispose();
@@ -111,12 +110,19 @@ namespace Elementary
             this.childElements.Clear();
         }
 
-        protected virtual void OnDispose(Element _)
+        ///<inheritdoc cref="IElement.OnDispose"/>
+        protected virtual void OnDispose()
         {
         }
 
         #endregion
 
+        ///<inheritdoc cref="IElementContext.CreateElement"/>
+        protected T CreateElement<T>() where T : IElement
+        {
+            return this.CreateElement<T>(typeof(T));
+        }
+        
         ///<inheritdoc cref="IElementContext.CreateElement"/>
         protected T CreateElement<T>(Type implementationType) where T : IElement
         {

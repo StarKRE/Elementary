@@ -13,26 +13,20 @@ namespace Elementary
         private static readonly Type usingType = typeof(Using);
 
         private static readonly Type objectType = typeof(object);
-
+        
         /// <summary>
-        ///     <para>Assembly scope of element types.</para>
+        ///     <para>Builds an element type dictionary.</para>
         /// </summary>
-        protected virtual HashSet<string> RequiredAssemblies { get; } = new HashSet<string>
-        {
-            "Assembly-CSharp-firstpass",
-            "Assembly-CSharp"
-        };
-
         public Dictionary<Type, HashSet<Type>> Build()
         {
             var inheritanceTable = new Dictionary<Type, HashSet<Type>>();
             var currentDomain = AppDomain.CurrentDomain;
             var assemblies = currentDomain.GetAssemblies();
+            var availableAssemblySet = this.ProvideAssemblyNames();
             foreach (var assembly in assemblies)
             {
-                var assemblyName = assembly.GetName();
-                var assemblyNameString = assemblyName.Name;
-                if (!this.RequiredAssemblies.Contains(assemblyNameString))
+                var assemblyName = assembly.GetName().Name;
+                if (!availableAssemblySet.Contains(assemblyName))
                 {
                     continue;
                 }
@@ -81,7 +75,8 @@ namespace Elementary
             var interfaceTypes = type.GetInterfaces();
             foreach (var interfaceType in interfaceTypes)
             {
-                if (!table.TryGetValue(interfaceType, out var derivedTypes))
+                HashSet<Type> derivedTypes;
+                if (!table.TryGetValue(interfaceType, out derivedTypes))
                 {
                     derivedTypes = new HashSet<Type>();
                     table.Add(interfaceType, derivedTypes);
@@ -100,7 +95,8 @@ namespace Elementary
             };
             while (!ReferenceEquals(baseType, null) && !ReferenceEquals(baseType, objectType))
             {
-                if (!table.TryGetValue(baseType, out var baseDerivedTypes))
+                HashSet<Type> baseDerivedTypes;
+                if (!table.TryGetValue(baseType, out baseDerivedTypes))
                 {
                     baseDerivedTypes = new HashSet<Type>();
                     table.Add(baseType, baseDerivedTypes);
@@ -114,6 +110,18 @@ namespace Elementary
 
                 baseType = baseType.BaseType;
             }
+        }
+
+        /// <summary>
+        ///     <para>Available assembly scopes of element types.</para>
+        /// </summary>
+        protected virtual HashSet<string> ProvideAssemblyNames()
+        {
+            return new HashSet<string>
+            {
+                "Assembly-CSharp-firstpass",
+                "Assembly-CSharp"
+            };
         }
     }
 }
