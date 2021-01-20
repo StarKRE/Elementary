@@ -174,7 +174,7 @@ public sealed class RepositoryLayer : ElementLayer<Repository>
 }
 ```
 
-- [**ElementLayer**](https://github.com/StarKRE/Elementary/blob/master/Lib/ElementLayer.cs) - **A dictionary of "T" elements by type**
+- [**ElementLayer**](https://github.com/StarKRE/Elementary/blob/master/Lib/ElementLayer.cs) - **A dictionary of unique elements derived from "T"**
 
 4. Update **MyApplication.cs**
 
