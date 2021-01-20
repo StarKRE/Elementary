@@ -1,11 +1,11 @@
 # Elementary
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Download](https://img.shields.io/github/downloads/StarKRE/Elementary/v.1.6/total?color=green&label=download%20v.1.7)](https://github.com/StarKRE/Elementary/releases/download/v.1.7/Elementary.unitypackage)
+[![Download](https://img.shields.io/github/downloads/StarKRE/Elementary/v.1.6/total?color=green&label=download%20)](https://github.com/StarKRE/Elementary/releases/download/v.01.2021/Elementary.zip)
 
 ---
 
 ### How to start with Unity?
-1. [Download](https://github.com/StarKRE/Elementary/releases/download/v.1.7/Elementary.unitypackage) the library
+1. [Download](https://github.com/StarKRE/Elementary/releases/download/v.01.2021/Elementary.unitypackage) the unity package
 2. Import Elementary.unitypackage
 3. Create a **GameObject** on scene and add **MainScript.cs**
 
@@ -39,8 +39,9 @@ using UnityEngine;
 public sealed class MyApplication : Element, IRootElement
 {
     //OnCreate is called after constructor
-    protected override void OnCreate(Element _, IElementContext context)
+    protected override void OnCreate()
     {
+        base.OnCreate();
         Debug.Log("Hello world!");
     }
 }
@@ -72,8 +73,9 @@ public interface IClient : IElement
 [Using]
 public sealed class Client : Element, IClient
 {
-    protected override void OnCreate(Element _, IElementContext context)
+    protected override void OnCreate()
     {
+        base.OnCreate();
         Debug.Log("Client is created!");
     }
 }
@@ -89,10 +91,12 @@ public sealed class MyApplication : Element, IRootElement
     public IClient Client { get; private set; }
     
     //OnCreate is called after constructor
-    protected override void OnCreate(Element _, IElementContext context)
+    protected override void OnCreate()
     {
+        base.OnCreate();
         Debug.Log("Hello world!");
-        this.Client = this.CreateElement<IClient>(typeof(Client));
+        
+        this.Client = this.CreateElement<Client>();
     }
 }
 ```
@@ -115,8 +119,10 @@ public abstract class Repository : Element
     protected IClient Client { get; private set; }
 
     //OnPrepare is called after all elements are created 
-    protected override void OnPrepare(Element _)
+    protected override void OnPrepare()
     {
+        base.OnPrepare();
+        
         //Provide client from MyApplication class
         this.Client = this.GetRootElement<MyApplication>().Client; 
     }
@@ -132,8 +138,9 @@ using UnityEngine;
 [Using]
 public sealed class UserRepository : Repository
 {
-    protected override void OnCreate(Element _, IElementContext context)
+    protected override void OnCreate()
     {
+        base.OnCreate();
         Debug.Log("UserRepository is created!");
     }
 }
@@ -141,8 +148,9 @@ public sealed class UserRepository : Repository
 [Using]
 public sealed class LevelsRepository : Repository
 {
-    protected override void OnCreate(Element _, IElementContext context)
+    protected override void OnCreate()
     {
+        base.OnCreate();
         Debug.Log("LevelsRepository is created!");
     }
 }
@@ -181,11 +189,13 @@ public sealed class MyApplication : Element, IRootElement
     public RepositoryLayer RepositoryLayer { get; private set; }
     
     //OnCreate is called after constructor
-    protected override void OnCreate(Element _, IElementContext context)
+    protected override void OnCreate()
     {
+        base.OnCreate();
         Debug.Log("Hello world!");
-        this.Client = this.CreateElement<IClient>(typeof(Client));
-        this.RepositoryLayer = this.CreateElement<RepositoryLayer>(typeof(RepositoryLayer));
+        this.Client = this.CreateElement<Client>();
+        
+        this.RepositoryLayer = this.CreateElement<RepositoryLayer>();
     }
 }
 ```
@@ -214,8 +224,10 @@ public abstract class Interactor : Element
 {
     private RepositoryLayer repositoryLayer;
 
-    protected override void OnPrepare(Element _)
+    protected override void OnPrepare()
     {
+        base.OnPrepare();
+        
         //Provide repository layer from MyApplication class
         this.repositoryLayer = this.GetRootElement<MyApplication>().RepositoryLayer;
     }
@@ -236,8 +248,10 @@ using UnityEngine;
 [Using]
 public sealed class UserInteractor : Interactor
 {
-    protected override void OnPrepare(Element _)
+    protected override void OnPrepare()
     {
+        base.OnPrepare();
+        
         var userRepository = this.GetRepository<UserRepository>();
         Debug.Log($"User interactor -> {userRepository.GetType().Name}");
     }
@@ -246,8 +260,10 @@ public sealed class UserInteractor : Interactor
 [Using]
 public sealed class LevelsInteractor : Interactor
 {
-    protected override void OnPrepare(Element _)
+    protected override void OnPrepare()
     {
+        base.OnPrepare();
+     
         var levelsRepository = this.GetRepository<LevelsRepository>();
         Debug.Log($"Levels interactor -> {levelsRepository.GetType().Name}");
     }
@@ -271,11 +287,13 @@ public sealed class MyApplication : Element, IRootElement
     public IEnumerable<Interactor> Interactors { get; private set; }
 
     //OnCreate is called after constructor
-    protected override void OnCreate(Element _, IElementContext context)
+    protected override void OnCreate()
     {
+        base.OnCreate();
         Debug.Log("Hello world!");
         this.Client = this.CreateElement<IClient>(typeof(Client));
         this.RepositoryLayer = this.CreateElement<RepositoryLayer>(typeof(RepositoryLayer));
+
         this.Interactors = this.CreateElements<Interactor>();
     }
 }
