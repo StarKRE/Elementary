@@ -1,22 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
 namespace Elementary
 {
     /// <summary>
-    ///     <para>Builds an inheritance dictionary: interface vs specific type.</para>
+    ///     <para>Builds an inheritance dictionary: abstact type vs implementation types.</para>
     /// </summary>
-    public class ElementTypeDictionaryBuilder
+    public interface ITypeDictionaryBuilder
+    {
+        /// <summary>
+        ///     <para>Builds an element type dictionary.</para>
+        /// </summary>
+        Dictionary<Type, HashSet<Type>> Build();
+    }
+    
+    /// <inheritdoc cref="ITypeDictionaryBuilder"/>
+    public class TypeDictionaryBuilder : ITypeDictionaryBuilder
     {
         private static readonly Type elementType = typeof(IElement);
 
         private static readonly Type usingType = typeof(Using);
 
         private static readonly Type objectType = typeof(object);
-        
-        /// <summary>
-        ///     <para>Builds an element type dictionary.</para>
-        /// </summary>
+
+        /// <inheritdoc cref="ITypeDictionaryBuilder"/>
         public Dictionary<Type, HashSet<Type>> Build()
         {
             var inheritanceTable = new Dictionary<Type, HashSet<Type>>();
@@ -37,7 +46,7 @@ namespace Elementary
                     this.TryRegisterType(inheritanceTable, type);
                 }
             }
-
+            
             return inheritanceTable;
         }
 
@@ -66,8 +75,21 @@ namespace Elementary
                 return;
             }
 
+            this.AddSelfType(table, type);
             this.AddInterfaceTypes(type, table);
             this.AddBaseTypes(type, table);
+        }
+
+        private void AddSelfType(Dictionary<Type, HashSet<Type>> table, Type type)
+        {
+            HashSet<Type> childTypes;
+            if (!table.TryGetValue(type, out childTypes))
+            {
+                childTypes = new HashSet<Type>();
+                table.Add(type, childTypes);
+            }
+
+            childTypes.Add(type);
         }
 
         private void AddInterfaceTypes(Type type, Dictionary<Type, HashSet<Type>> table)
@@ -123,5 +145,25 @@ namespace Elementary
                 "Assembly-CSharp"
             };
         }
+
+// #if UNITY_EDITOR
+//         private static void LogTable(Dictionary<Type, HashSet<Type>> inheritanceTable)
+//         {
+//             var stringBuilder = new StringBuilder();
+//             stringBuilder.Append("TABLE\n");
+//             foreach (var kv in inheritanceTable)
+//             {
+//                 stringBuilder.Append($"{kv.Key.Name} -> ");
+//                 foreach (var type in kv.Value)
+//                 {
+//                     stringBuilder.Append(type.Name).Append(" ");
+//                 }
+//
+//                 stringBuilder.AppendLine();
+//             }
+//
+//             Debug.Log(stringBuilder.ToString());
+//         }
+// #endif
     }
 }

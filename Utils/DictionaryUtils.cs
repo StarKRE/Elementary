@@ -1,21 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
 namespace Elementary
 {
     /// <summary>
     ///     <para>Utils for this library.</para>
     /// </summary>
-    internal static class ElementaryUtils
+    internal static class DictionaryUtils
     {
         /// <summary>
-        ///     Finds a value inherited from "R".
+        ///     Finds a value derived from "R".
         /// </summary>
-        /// 
-        /// <param name="map">Dictionary</param>
-        /// <typeparam name="R">Required type.</typeparam>
-        /// <typeparam name="T">Dictionary value type.</typeparam>
-        /// <returns>Required value.</returns>
         internal static R Find<R, T>(this Dictionary<Type, T> map)
         {
             return (R) map.Find(typeof(R));
@@ -37,7 +34,7 @@ namespace Elementary
                 }
             }
 
-            throw new Exception("Item is not found!");
+            throw new Exception($"Item is not found {requiredType.Name}!");
         }
     }
 }

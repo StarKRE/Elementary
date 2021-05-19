@@ -1,7 +1,7 @@
 namespace Elementary
 {
     /// <summary>
-    ///     <para>A base contract of element.</para>.
+    ///     <para>A contract of system element.</para>.
     /// </summary>
     public interface IElement
     {
@@ -9,12 +9,12 @@ namespace Elementary
         ///     <para>Called after constructor.</para>
         ///     <para>Use this method to instantiate child elements.</para>
         /// </summary>
-        /// <param name="context">A parent context that contains this element.</param>
+        /// <param name="context">A element context that creates this element.</param>
         void OnCreate(IElementContext context);
 
         /// <summary>
         ///     <para>Called when all elements have created.</para>
-        ///     <para>Use this method to get other element references.</para>
+        ///     <para>Use this method to get other element references those out of scope.</para>
         /// </summary>
         void OnPrepare();
 
@@ -25,21 +25,30 @@ namespace Elementary
         void OnReady();
 
         /// <summary>
-        ///     <para>Called when all elements have ready.</para>
+        ///     <para>Called when the element context starts its work.</para>
         ///     <para>Use this method to setup initial state.</para>
         /// </summary>
         void OnStart();
 
         /// <summary>
-        ///     <para>Called before parent context is terminating.</para>
+        ///     <para>Called when the element context ends its work.</para>
         ///     <para>Use this method to unsubscribe from other elements.</para>
         /// </summary>
         void OnFinish();
 
         /// <summary>
-        ///     <para>Called when parent context is terminating.</para>
-        ///     <para>Use this method to dispose resources.</para>
+        ///     <para>Called when the element context disposes resources.</para>
+        ///     <para>Use this method to dispose unmanaged resources.</para>
         /// </summary>
         void OnDispose();
+    }
+    
+    /// <summary>
+    ///     <para>A contract of root system element.</para>
+    ///     <para>Keeps into the element context.</para>
+    ///     <para>The root element is created automatically by the element context.</para>
+    /// </summary>
+    public interface IRootElement : IElement
+    {
     }
 }

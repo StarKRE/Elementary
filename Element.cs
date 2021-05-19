@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Elementary
@@ -9,7 +8,7 @@ namespace Elementary
     public abstract class Element : IElement
     {
         /// <summary>
-        ///     <para>A parent context where this element is located.</para>
+        ///     <para>A element context reference that created this element.</para>
         /// </summary>
         private IElementContext context;
 
@@ -19,7 +18,7 @@ namespace Elementary
         private readonly HashSet<IElement> childElements;
 
         /// <summary>
-        ///     <para>Any derived element must contains only default constructor.</para>
+        ///     <para>Any element should only contain a default constructor.</para>
         /// </summary>
         protected Element()
         {
@@ -120,13 +119,7 @@ namespace Elementary
         ///<inheritdoc cref="IElementContext.CreateElement"/>
         protected T CreateElement<T>() where T : IElement
         {
-            return this.CreateElement<T>(typeof(T));
-        }
-        
-        ///<inheritdoc cref="IElementContext.CreateElement"/>
-        protected T CreateElement<T>(Type implementationType) where T : IElement
-        {
-            var newElement = this.context.CreateElement<T>(implementationType);
+            var newElement = this.context.CreateElement<T>();
             this.childElements.Add(newElement);
             return newElement;
         }

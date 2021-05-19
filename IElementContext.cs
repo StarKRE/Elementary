@@ -1,57 +1,37 @@
-using System;
 using System.Collections.Generic;
 
 namespace Elementary
 {
     /// <summary>
-    ///     <para>A system that contains elements.</para>
+    ///     <para>An element system contract.</para>
+    ///     <para>Creates elements by abstract type or interface.</para>
+    ///     <para>Maintains the root elements and provides access to them.</para>
     /// </summary>
     public interface IElementContext
     {
         /// <summary>
-        ///     <para>Initializes this system.</para>
-        ///     <para>Use this method to instantiate elements.</para>
+        ///     <para>Creates a new element instance of "T".</para>
         /// </summary>
-        void Initialize();
+        /// <typeparam name="T">Type or interface.</typeparam>
+        T CreateElement<T>() where T : IElement;
 
         /// <summary>
-        ///     <para>Finalizes this system.</para>
-        ///     <para>Use this method to destroy elements.</para>
+        ///     <para>Creates element instances derived from "T.</para>
         /// </summary>
-        void Terminate();
-
-        /// <summary>
-        ///     <para>Create a new element instance.</para>
-        ///     <para>Use this method instead the default constructor.</para>
-        ///     <para>Don't use constructors to instantiate an element instance!</para>
-        /// </summary>
-        /// 
-        /// <param name="implementationType">Specific type.</param>
-        /// <returns>A new instance of element.</returns>
-        T CreateElement<T>(Type implementationType) where T : IElement;
-
-        /// <summary>
-        ///     <para>Instantiates a new set of unique elements derived from "T".</para>
-        /// </summary>
-        /// 
-        /// <typeparam name="T">Base element type.</typeparam>
-        /// <returns>Unique element instances inherited from "T".</returns>
+        /// <typeparam name="T">Type or interface.</typeparam>
         IEnumerable<T> CreateElements<T>() where T : IElement;
 
         /// <summary>
-        ///     <para>Returns a root element of this context.</para>
+        ///     <para>Gets a root element of "T".</para>
         /// </summary>
         /// 
-        /// <typeparam name="T">The root element type.</typeparam>
-        /// <returns>Instance.</returns>
-        T GetRootElement<T>() where T : IRootElement;
+        /// <typeparam name="T">Type or interface.</typeparam>
+        T GetRootElement<T>();
 
         /// <summary>
-        ///     <para>Returns a set of root elements derived from "T".</para>
+        ///     <para>Gets root elements derived from "T".</para>
         /// </summary>
-        /// 
-        /// <typeparam name="T">Base elemeny type.</typeparam>
-        /// <returns>A group of root elements inherited from "T".</returns>
-        IEnumerable<T> GetRootElements<T>() where T : IRootElement;
+        /// <typeparam name="T">Type or interface.</typeparam>
+        IEnumerable<T> GetRootElements<T>();
     }
 }
