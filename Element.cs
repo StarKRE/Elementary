@@ -137,13 +137,13 @@ namespace Elementary
         }
 
         ///<inheritdoc cref="IElementContext.GetRootElement"/>
-        protected T GetRootElement<T>() where T : IRootElement
+        protected T GetRootElement<T>()
         {
             return this.context.GetRootElement<T>();
         }
 
         ///<inheritdoc cref="IElementContext.GetRootElements"/>
-        protected IEnumerable<T> GetRootElements<T>() where T : IRootElement
+        protected IEnumerable<T> GetRootElements<T>()
         {
             return this.context.GetRootElements<T>();
         }
