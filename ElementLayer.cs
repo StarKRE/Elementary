@@ -35,7 +35,7 @@ namespace Elementary
         }
 
         /// <inheritdoc cref="IElement.OnCreate"/>
-        protected override void OnCreate()
+        protected sealed override void OnCreate()
         {
             var elements = this.CreateElements<T>();
             foreach (var element in elements)
@@ -43,12 +43,23 @@ namespace Elementary
                 var type = element.GetType();
                 this.elementMap.Add(type, element);
             }
+
+            this.OnCreate(this);
+        }
+
+        protected virtual void OnCreate(ElementLayer<T> _)
+        {
         }
 
         /// <inheritdoc cref="IElement.OnDispose"/>
-        protected override void OnDispose()
+        protected sealed override void OnDispose()
         {
             this.elementMap.Clear();
+            this.OnDispose(this);
+        }
+        
+        protected virtual void OnDispose(ElementLayer<T> _)
+        {
         }
     }
 }
