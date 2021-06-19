@@ -15,15 +15,7 @@ namespace Elementary
         /// <summary>
         ///     <para>Elements instantiated by this element.</para>
         /// </summary>
-        private readonly HashSet<IElement> childElements;
-
-        /// <summary>
-        ///     <para>Any element should only contain a default constructor.</para>
-        /// </summary>
-        protected Element()
-        {
-            this.childElements = new HashSet<IElement>();
-        }
+        private HashSet<IElement> childElements;
 
         #region Lifecycle
 
@@ -40,9 +32,12 @@ namespace Elementary
 
         void IElement.OnPrepare()
         {
-            foreach (var element in this.childElements)
+            if (this.childElements != null)
             {
-                element.OnPrepare();
+                foreach (var element in this.childElements)
+                {
+                    element.OnPrepare();
+                }
             }
 
             this.OnPrepare();
@@ -55,9 +50,12 @@ namespace Elementary
 
         void IElement.OnReady()
         {
-            foreach (var element in this.childElements)
+            if (this.childElements != null)
             {
-                element.OnReady();
+                foreach (var element in this.childElements)
+                {
+                    element.OnReady();
+                }
             }
 
             this.OnReady();
@@ -70,9 +68,12 @@ namespace Elementary
 
         void IElement.OnStart()
         {
-            foreach (var element in this.childElements)
+            if (this.childElements != null)
             {
-                element.OnStart();
+                foreach (var element in this.childElements)
+                {
+                    element.OnStart();
+                }
             }
 
             this.OnStart();
@@ -85,9 +86,12 @@ namespace Elementary
 
         void IElement.OnFinish()
         {
-            foreach (var element in this.childElements)
+            if (this.childElements != null)
             {
-                element.OnFinish();
+                foreach (var element in this.childElements)
+                {
+                    element.OnFinish();
+                }
             }
 
             this.OnFinish();
@@ -101,12 +105,16 @@ namespace Elementary
         void IElement.OnDispose()
         {
             this.OnDispose();
-            foreach (var element in this.childElements)
-            {
-                element.OnDispose();
-            }
 
-            this.childElements.Clear();
+            if (this.childElements != null)
+            {
+                foreach (var element in this.childElements)
+                {
+                    element.OnDispose();
+                }
+
+                this.childElements = null;
+            }
         }
 
         ///<inheritdoc cref="IElement.OnDispose"/>
@@ -117,20 +125,30 @@ namespace Elementary
         #endregion
 
         ///<inheritdoc cref="IElementContext.CreateElement"/>
-        protected T CreateElement<T>() where T : IElement
+        protected T CreateElement<T>()
         {
+            if (this.childElements == null)
+            {
+                this.childElements = new HashSet<IElement>();
+            }
+
             var newElement = this.context.CreateElement<T>();
-            this.childElements.Add(newElement);
+            this.childElements.Add((IElement) newElement);
             return newElement;
         }
 
         ///<inheritdoc cref="IElementContext.CreateElements"/>
-        protected IEnumerable<T> CreateElements<T>() where T : IElement
+        protected IEnumerable<T> CreateElements<T>()
         {
+            if (this.childElements == null)
+            {
+                this.childElements = new HashSet<IElement>();
+            }
+
             var newElements = this.context.CreateElements<T>();
             foreach (var element in newElements)
             {
-                this.childElements.Add(element);
+                this.childElements.Add((IElement) element);
             }
 
             return newElements;

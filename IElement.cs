@@ -1,6 +1,15 @@
 namespace Elementary
 {
     /// <summary>
+    ///     <para>A contract of root system element.</para>
+    ///     <para>Keeps into the element context.</para>
+    ///     <para>The root element is created automatically by the element context.</para>
+    /// </summary>
+    public interface IRootElement : IElement
+    {
+    }
+
+    /// <summary>
     ///     <para>A contract of system element.</para>.
     /// </summary>
     public interface IElement
@@ -41,14 +50,5 @@ namespace Elementary
         ///     <para>Use this method to dispose unmanaged resources.</para>
         /// </summary>
         void OnDispose();
-    }
-    
-    /// <summary>
-    ///     <para>A contract of root system element.</para>
-    ///     <para>Keeps into the element context.</para>
-    ///     <para>The root element is created automatically by the element context.</para>
-    /// </summary>
-    public interface IRootElement : IElement
-    {
     }
 }

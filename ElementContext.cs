@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Elementary
 {
@@ -30,7 +29,7 @@ namespace Elementary
         {
             this.inheritanceTable = inheritanceTable;
             this.rootElementMap = new Dictionary<Type, IRootElement>();
-            
+
             var rootElements = this.CreateElements<IRootElement>();
             foreach (var rootElement in rootElements)
             {
@@ -53,7 +52,7 @@ namespace Elementary
                 rootElement.OnStart();
             }
         }
-        
+
         /// <summary>
         ///     <para>Finalizes root elements.</para>
         /// </summary>
@@ -74,7 +73,7 @@ namespace Elementary
         }
 
         ///<inheritdoc cref="IElementContext.CreateElement"/>
-        public T CreateElement<T>() where T : IElement
+        public T CreateElement<T>()
         {
             var baseType = typeof(T);
             if (!this.inheritanceTable.TryGetValue(baseType, out var derivedTypes) ||
@@ -88,31 +87,37 @@ namespace Elementary
                 throw new SeveralImplementationsException(baseType, derivedTypes);
             }
 
+            Type targetType;
             using (var enumerator = derivedTypes.GetEnumerator())
             {
                 enumerator.MoveNext();
-                return this.CreateInstance<T>(enumerator.Current);
+                targetType = enumerator.Current;
             }
+
+            return this.CreateInstance<T>(targetType);
         }
 
         ///<inheritdoc cref="IElementContext.CreateElements"/>
-        public IEnumerable<T> CreateElements<T>() where T : IElement
+        public IEnumerable<T> CreateElements<T>()
         {
             var baseType = typeof(T);
             if (!this.inheritanceTable.ContainsKey(baseType))
             {
-                return new HashSet<T>();
+                return new T[0];
             }
 
-            var newElements = new HashSet<T>();
             var derivedTypes = this.inheritanceTable[baseType];
+            var result = new T[derivedTypes.Count];
+
+            var index = 0;
             foreach (var type in derivedTypes)
             {
                 var newElement = this.CreateInstance<T>(type);
-                newElements.Add(newElement);
+                result[index] = newElement;
+                index++;
             }
 
-            return newElements;
+            return result;
         }
 
         ///<inheritdoc cref="IElementContext.GetRootElement"/>
@@ -127,11 +132,11 @@ namespace Elementary
             return this.rootElementMap.Values.OfType<T>();
         }
 
-        private T CreateInstance<T>(Type type) where T : IElement
+        private T CreateInstance<T>(Type type)
         {
-            var element = (T) Activator.CreateInstance(type);
+            var element = (IElement) Activator.CreateInstance(type);
             element.OnCreate(this);
-            return element;
+            return (T) element;
         }
     }
 }

@@ -13,13 +13,13 @@ namespace Elementary
         ///     <para>Creates a new element instance of "T".</para>
         /// </summary>
         /// <typeparam name="T">Type or interface.</typeparam>
-        T CreateElement<T>() where T : IElement;
+        T CreateElement<T>();
 
         /// <summary>
         ///     <para>Creates element instances derived from "T.</para>
         /// </summary>
         /// <typeparam name="T">Type or interface.</typeparam>
-        IEnumerable<T> CreateElements<T>() where T : IElement;
+        IEnumerable<T> CreateElements<T>();
 
         /// <summary>
         ///     <para>Gets a root element of "T".</para>

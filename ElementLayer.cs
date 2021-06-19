@@ -5,11 +5,11 @@ using System.Linq;
 namespace Elementary
 {
     /// <summary>
-    ///    <para>Dictionary of unique elements derived from "T".</para>
+    ///    <para>Dictionary with unique elements derived from "T".</para>
     /// </summary>
     /// 
     /// <typeparam name="T">Type or interface.</typeparam>
-    public abstract class ElementLayer<T> : Element where T : IElement
+    public abstract class ElementLayer<T> : Element
     {
         private readonly Dictionary<Type, T> elementMap;
 
