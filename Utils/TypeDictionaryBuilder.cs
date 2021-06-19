@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
 
 namespace Elementary
 {
@@ -145,25 +143,5 @@ namespace Elementary
                 "Assembly-CSharp"
             };
         }
-
-// #if UNITY_EDITOR
-//         private static void LogTable(Dictionary<Type, HashSet<Type>> inheritanceTable)
-//         {
-//             var stringBuilder = new StringBuilder();
-//             stringBuilder.Append("TABLE\n");
-//             foreach (var kv in inheritanceTable)
-//             {
-//                 stringBuilder.Append($"{kv.Key.Name} -> ");
-//                 foreach (var type in kv.Value)
-//                 {
-//                     stringBuilder.Append(type.Name).Append(" ");
-//                 }
-//
-//                 stringBuilder.AppendLine();
-//             }
-//
-//             Debug.Log(stringBuilder.ToString());
-//         }
-// #endif
     }
 }
